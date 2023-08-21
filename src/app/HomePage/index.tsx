@@ -1,10 +1,21 @@
 import React from "react";
-import { Container } from "./styles";
+import { Container, GridContainer } from "./styles";
+import Topbar from "@/components/Topbar";
+import RoomCard from "@/components/RoomCard";
 
 export default function HomePage() {
   return (
     <Container>
-      <p>studymate home :D</p>
+      <Topbar/>
+      <GridContainer>
+        <RoomCard/>
+        <RoomCard/>
+        <RoomCard/>
+        <RoomCard/>
+        <RoomCard/>
+        <RoomCard/>
+        <RoomCard/>
+      </GridContainer>
     </Container>
   );
 }
