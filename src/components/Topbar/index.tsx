@@ -1,14 +1,29 @@
 import React from 'react';
-
-import { Container, Logo, Configuracoes,Login, Wrap } from './styles';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Container, Wrap } from './styles';
 
 export default function Topbar() {
 return (
   <Container>
-    <Logo>Logo</Logo>
+    <p>StudyMate :D</p>
     <Wrap>
-      <Configuracoes>Configurações</Configuracoes>
-      <Login>Login</Login>
+      <Link href="/Settings">
+      <Image
+        className="user"
+        src="./assets/icons/settings.svg"
+        width={32}
+        height={32}
+        alt="ícone de usuário"
+      />
+      </Link>
+      <Image
+        className="user"
+        src="./assets/icons/user.svg"
+        width={32}
+        height={32}
+        alt="ícone de usuário"
+      />
     </Wrap>
   </Container>
 );

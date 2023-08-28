@@ -13,22 +13,16 @@ export const Container = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
 `;
 
 export const Wrap = styled.div`
+ 
 
-`;
+  .user{
+    margin: 0 0.5rem 0 1rem;
+  }
 
-export const Logo = styled.text`
-  font-size: 1rem;
-`;
-
-export const Configuracoes = styled.text`
-  font-size: 1rem;
-`;
-
-export const Login = styled.text`
-  font-size: 1rem;
-  margin: 0 0 0 0.5rem;
+  p {
+    font-size: 1rem;
+  }
 `;
