@@ -9,11 +9,12 @@ import Modal from "@/components/Modal";
 import Input from "@/components/Input";
 import Loading from "@/components/Loading";
 import api from "../../service/api";
+import { useRouter } from "next/router";
 
 export default function HomePage() {
-
+  useRouter;
   const [userName, setUserName] = useState<string>("");
-  const [userEmail, setUserEmail] = useState<string>("test@gmail.com");
+  const [userEmail, setUserEmail] = useState<string>("admin@topics.com");
   const [userPassword, setUserPassword] = useState<string>("test123");
   const [isOpenModal, setIsOpenModal] = useState<boolean>(true);
   const [isOpenModalSignIn, setIsOpenModalSignIn] = useState<boolean>(false);
@@ -29,11 +30,11 @@ export default function HomePage() {
         password: userPassword,
       });
 
-      const resp = await api.post("/login", raw);
-
+      const resp = await api.post("/auth/login", raw);
+      
       if (resp.status === 200) {
-        localStorage.setItem("user", JSON.stringify(resp.data));
-        sessionStorage.setItem("user", JSON.stringify(resp.data));
+        localStorage.setItem("username", JSON.stringify(resp.data.username));
+        sessionStorage.setItem("username", JSON.stringify(resp.data.username));
         setIsOpenModal(false);
         setIsOpenModalSignIn(false);
       } else {
@@ -56,10 +57,10 @@ export default function HomePage() {
         password: userPassword,
       });
 
-      const resp = await api.post("/user/create", raw);
+      const resp = await api.post("/users", raw);
 
-      localStorage.setItem("user", JSON.stringify(resp.data));
-      sessionStorage.setItem("user", JSON.stringify(resp.data));
+      localStorage.setItem("username", JSON.stringify(resp.data.username));
+      sessionStorage.setItem("username", JSON.stringify(resp.data.username));
       setIsOpenModal(false);
       setIsOpenModalSignIn(false);
     } catch (error) {

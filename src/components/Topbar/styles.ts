@@ -13,16 +13,17 @@ export const Container = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-`;
-
-export const Wrap = styled.div`
- 
 
   .user{
     margin: 0 0.5rem 0 1rem;
   }
 
-  p {
+  span {
     font-size: 1rem;
+  }
+  .row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
 `;
