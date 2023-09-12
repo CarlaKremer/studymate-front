@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Container, GridContainer, ModalWrapper } from "./styles";
@@ -20,6 +20,15 @@ export default function HomePage() {
   const [isOpenModalSignIn, setIsOpenModalSignIn] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [userLogged, setUserLogged] = useState<any>(null);
+
+  useEffect(() => {
+    const sessionStorageUser = sessionStorage.getItem("username");
+    if (sessionStorageUser != null) {
+      setUserLogged(JSON.parse(sessionStorageUser));
+      setIsOpenModal(false);
+    }
+  }, []);
 
   async function authenticateUser() {
     setError(false);
@@ -75,7 +84,9 @@ export default function HomePage() {
     <Container>
       <Topbar/>
       <GridContainer>
-        <RoomCard/>
+        <Link href={'/StudyRoom'}>
+          <RoomCard/>
+        </Link>
         <RoomCard/>
         <RoomCard/>
         <RoomCard/>
