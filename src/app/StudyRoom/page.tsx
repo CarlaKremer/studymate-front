@@ -1,9 +1,11 @@
 'use client';
 import React, { useEffect, useState } from "react";
-import { Container, Column, Navigation, ScreenSharing, RoomMates, PanelContainer, Pomodoro, Todo, ColumnSlider, Slider } from "./styles";
+import { Container, Column, Navigation, ScreenSharing, RoomMates, PanelContainer, PomodoroWrap, TodoWrap, ColumnSlider, Slider } from "./styles";
 import Chat from "@/components/Chat";
 import Link from "next/link";
 import Image from "next/image";
+import Todo from "@/components/Todo";
+import Pomodoro from "@/components/Pomodoro";
 
 export default function StudyRoom() {
   const [isOpen, setIsOpen] = useState(true);
@@ -35,19 +37,19 @@ export default function StudyRoom() {
         <RoomMates/>
       </Column>
 
-<Slider>
-      <ColumnSlider>
-          <Pomodoro className="wrap">
-            00:00
-          </Pomodoro>
-          <Todo className="wrap">
-            <li>item1</li>
-          </Todo>
-      </ColumnSlider>
-      <Column>
-          <Chat username={userLogged} server='http://localhost:3002'/>
-      </Column>
-</Slider>
+      <Slider>
+        <ColumnSlider>
+            <PomodoroWrap className="wrap">
+             <Pomodoro/>
+            </PomodoroWrap>
+            <TodoWrap className="wrap">
+              <Todo/>
+            </TodoWrap>
+        </ColumnSlider>
+        <Column>
+            <Chat username={userLogged} server='http://localhost:3002'/>
+        </Column>
+      </Slider>
 
      </Container>
   );

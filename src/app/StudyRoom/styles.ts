@@ -26,7 +26,6 @@ export const ColumnSlider = styled.div`
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
   }
 
@@ -68,7 +67,7 @@ export const Slider = styled.div`
     align-items: center;
 `;
 
-export const Pomodoro = styled.div`
+export const PomodoroWrap = styled.div`
   width: 18rem;
   height: 15rem;
   border-radius: 1rem 0 0 0 ;
@@ -76,8 +75,8 @@ export const Pomodoro = styled.div`
   border-bottom: 1px solid #484B5C;
 `;
 
-export const Todo = styled.div`
-  width: 18rem;
+export const TodoWrap = styled.div`
+  width: 100%;
   height: 35rem;
   border-radius: 0 0 0 1rem;
   background-color: #363847;
