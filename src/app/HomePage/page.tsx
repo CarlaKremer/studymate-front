@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Container, GridContainer, ModalWrapper } from "./styles";
@@ -16,6 +16,7 @@ export default function HomePage() {
   const [userName, setUserName] = useState<string>("");
   const [userEmail, setUserEmail] = useState<string>("admin@topics.com");
   const [userPassword, setUserPassword] = useState<string>("test123");
+  const [rooms, setRooms] = useState<any[]>([]);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(true);
   const [isOpenModalSignIn, setIsOpenModalSignIn] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
@@ -31,7 +32,7 @@ export default function HomePage() {
       });
 
       const resp = await api.post("/auth/login", raw);
-      
+
       if (resp.status === 200) {
         localStorage.setItem("username", JSON.stringify(resp.data.username));
         sessionStorage.setItem("username", JSON.stringify(resp.data.username));
@@ -46,6 +47,10 @@ export default function HomePage() {
     }
     setLoading(false);
   }
+
+  useEffect(() => {
+    loadRooms();
+  }, []);
 
   async function createUser() {
     setError(false);
@@ -70,22 +75,31 @@ export default function HomePage() {
     setLoading(false);
   }
 
+  async function loadRooms() {
+    setError(false);
+    setLoading(true);
+    try {
+      const res = await api.get("/rooms");
+      setRooms(res.data);
+    } catch (error) {
+      setError(true);
+      console.log(error);
+    }
+    setLoading(false);
+  }
+
 
   return (
     <Container>
-      <Topbar/>
+      <Topbar />
       <GridContainer>
-        <RoomCard/>
-        <RoomCard/>
-        <RoomCard/>
-        <RoomCard/>
-        <RoomCard/>
-        <RoomCard/>
-        <RoomCard/>
+        {rooms.map(room => (
+          <RoomCard key={""} title={room.title} />
+        ))}
       </GridContainer>
 
-       {/* Login */}
-       <Modal isOpenModal={isOpenModal} setOpenModal={!isOpenModal}>
+      {/* Login */}
+      <Modal isOpenModal={isOpenModal} setOpenModal={!isOpenModal}>
         {!loading ? (
           <ModalWrapper>
             <div className="header">
