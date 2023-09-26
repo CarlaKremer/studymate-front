@@ -94,7 +94,10 @@ export default function HomePage() {
       <Topbar />
       <GridContainer>
         {rooms.map(room => (
-          <RoomCard key={""} title={room.title} />
+          <RoomCard key={""}
+            title={room.title}
+            description={room.description}
+            id={room.id} />
         ))}
       </GridContainer>
 
