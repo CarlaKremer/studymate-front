@@ -93,11 +93,18 @@ export default function HomePage() {
     <Container>
       <Topbar />
       <GridContainer>
-        {rooms.map(room => (
-          <RoomCard key={""}
-            title={room.title}
-            description={room.description}
-            id={room.id} />
+        {rooms.map((room, i) => (
+          <Link
+            key={i}
+            href={{
+              pathname: '/StudyRoom',
+              query: { roomId: room.id }
+            }}
+          >
+            <RoomCard
+              title={room.title}
+              description={room.description} />
+          </Link>
         ))}
       </GridContainer>
 

@@ -47,7 +47,7 @@ export default function StudyRoom() {
             </TodoWrap>
         </ColumnSlider>
         <Column>
-            <Chat username={userLogged} server='http://localhost:3002'/>
+            <Chat username={userLogged} server='http://localhost:3090'/>
         </Column>
       </Slider>
 
