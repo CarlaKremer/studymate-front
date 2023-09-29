@@ -14,16 +14,35 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  .user{
+  .icon{
     margin: 0 0.5rem 0 1rem;
+    justify-content: center;
   }
 
   span {
     font-size: 1rem;
   }
+
   .row{
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 16px;
+  }
+
+
+  button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    border-radius: 24px;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+
+    background-color: #1D1C26;
+    color: #FAFAFA;
+    font-size: 16px;
   }
 `;

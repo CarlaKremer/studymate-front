@@ -17,10 +17,16 @@ export default function HomePage() {
   const [userEmail, setUserEmail] = useState<string>("admin@topics.com");
   const [userPassword, setUserPassword] = useState<string>("test123");
   const [rooms, setRooms] = useState<any[]>([]);
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(true);
-  const [isOpenModalSignIn, setIsOpenModalSignIn] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(true);
+  const [isOpenModalSignIn, setIsOpenModalSignIn] = useState<boolean>(false);
+  
+  const [isOpenModalNewRoom, setIsOpenModalNewRoom] = useState<boolean>(false);
+  const [errorCreateRoom, setErrorCreateRoom] = useState<boolean>(false);
+  const [loadingCreateRoom, setLoadingCreateRoom] = useState<boolean>(false);
+  const [nameNewRoom, setNameNewRoom] = useState<string>("");
+  const [descriptionNewRoom, setDescriptionNewRoom] = useState<string>("");
 
   async function authenticateUser() {
     setError(false);
@@ -36,6 +42,10 @@ export default function HomePage() {
       if (resp.status === 200) {
         localStorage.setItem("username", JSON.stringify(resp.data.username));
         sessionStorage.setItem("username", JSON.stringify(resp.data.username));
+
+        localStorage.setItem("access_token", JSON.stringify(resp.data.access_token));
+        sessionStorage.setItem("access_token", JSON.stringify(resp.data.access_token));
+        
         setIsOpenModal(false);
         setIsOpenModalSignIn(false);
       } else {
@@ -48,10 +58,6 @@ export default function HomePage() {
     setLoading(false);
   }
 
-  useEffect(() => {
-    loadRooms();
-  }, []);
-
   async function createUser() {
     setError(false);
     setLoading(true);
@@ -62,10 +68,16 @@ export default function HomePage() {
         password: userPassword,
       });
 
-      const resp = await api.post("/users", raw);
+      const token = localStorage.getItem('access_token')?.replaceAll('"',"")
+
+      const resp = await api.post("/users", raw, { headers:{'Authorization':"Bearer " + token}} );
 
       localStorage.setItem("username", JSON.stringify(resp.data.username));
       sessionStorage.setItem("username", JSON.stringify(resp.data.username));
+
+      localStorage.setItem("access_token", resp.data.access_token);
+      sessionStorage.setItem("access_token", JSON.stringify(resp.data.access_token));
+
       setIsOpenModal(false);
       setIsOpenModalSignIn(false);
     } catch (error) {
@@ -75,6 +87,28 @@ export default function HomePage() {
     setLoading(false);
   }
 
+  async function createRoom(){
+    setErrorCreateRoom(false);
+    setLoadingCreateRoom(true);
+    try {
+      const raw = JSON.stringify({
+        title: nameNewRoom,
+        description: descriptionNewRoom
+      });
+
+      const token = localStorage.getItem('access_token')?.replaceAll('"',"")
+
+      const resp = await api.post("/rooms", raw, { headers:{'Authorization':"Bearer " + token}});
+      
+      loadRooms();
+      setIsOpenModalNewRoom(false);
+
+    } catch (error) {
+      setErrorCreateRoom(true);
+      console.log(error);
+    }
+    setLoadingCreateRoom(false);
+  }
   async function loadRooms() {
     setError(false);
     setLoading(true);
@@ -89,10 +123,18 @@ export default function HomePage() {
   }
 
 
+  useEffect(() => {
+    loadRooms();
+  }, []);
+
+
   return (
     <Container>
       <Topbar />
       <GridContainer>
+      <a onClick={()=>setIsOpenModalNewRoom(true)}>
+      <RoomCard newRoom={true} title={''} description={''} />
+      </a>
         {rooms.map((room, i) => (
           <Link
             key={i}
@@ -115,7 +157,6 @@ export default function HomePage() {
             <div className="header">
               <button
                 onClick={() => setIsOpenModal(false)}
-                data-testid="close-edit-nps"
               >
                 <Image
                   src="./assets/icons/X.svg"
@@ -185,7 +226,6 @@ export default function HomePage() {
             <div className="header">
               <button
                 onClick={() => setIsOpenModal(false)}
-                data-testid="close-edit-nps"
               >
                 <Image
                   src="./assets/icons/X.svg"
@@ -264,6 +304,51 @@ export default function HomePage() {
           <Loading />
         )}
       </Modal>
+      {/* Crete new room */}
+      <Modal isOpenModal={isOpenModalNewRoom} setOpenModal={!isOpenModalNewRoom}>
+          {!loadingCreateRoom ? (
+            <ModalWrapper>
+            <div className="header">
+              <button
+                onClick={() => setIsOpenModalNewRoom(false)}
+              >
+                <Image
+                  src="./assets/icons/X.svg"
+                  alt="ícone de fechar"
+                  width={20}
+                  height={20}
+                />
+              </button>
+            </div>
+            <div className="body">
+              <h1>Create a new room !</h1>
+              <Input
+                className="input"
+                placeholder="Name"
+                onChange={(e: any) => {
+                  setNameNewRoom(e);
+                }}
+                value={nameNewRoom}
+              />
+
+              <Input
+                className="input"
+                placeholder="Description"
+                onChange={(e: any) => {
+                  setDescriptionNewRoom(e);
+                }}
+                value={descriptionNewRoom}
+              />
+              <p className="error" hidden={!errorCreateRoom}>
+                Ocorreu um erro, tente novamente
+              </p>
+            </div>
+            <div className="footer">
+              <button onClick={() => createRoom()}>Create!</button>
+            </div>
+          </ModalWrapper>
+          ):( <Loading />)}
+        </Modal>
     </Container>
   );
 }

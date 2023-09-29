@@ -95,7 +95,7 @@ export default function Pomodoro() {
               src={"./assets/icons/pause.svg"}
               width={16}
               height={16}
-              alt="ícone de parar"
+              alt="ícone de pausar"
             />
           </button>
         ) : (
@@ -104,7 +104,7 @@ export default function Pomodoro() {
               src={"./assets/icons/play.svg"}
               width={16}
               height={16}
-              alt="ícone de play"
+              alt="ícone de continuar"
             />
           </button>
         )}
@@ -113,7 +113,7 @@ export default function Pomodoro() {
               src={"./assets/icons/backward.svg"}
               width={16}
               height={16}
-              alt="ícone de resetar"
+              alt="ícone de recomeçar"
             />
         </button>
 

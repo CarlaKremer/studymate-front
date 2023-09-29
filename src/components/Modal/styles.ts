@@ -9,6 +9,7 @@ export const Background = styled.div`
   background-color: rgb(0,0,0,0.8);
   z-index: 1000;
 `;
+
 export const Container = styled.div`
 width: auto;
   position: fixed;

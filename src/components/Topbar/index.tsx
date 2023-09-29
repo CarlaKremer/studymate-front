@@ -27,16 +27,15 @@ return (
   <Container>
     <p>StudyMate :D</p>
     <div className='row'>
-      <Link href="/Settings" className='row'>
-        <Image
-          className="user"
-          src="./assets/icons/settings.svg"
-          width={32}
-          height={32}
-          alt="ícone de usuário"
-        />
-      </Link>
-      <div className="row">
+        <Link href="/Settings" className='row' >
+          <Image
+            className="icon"
+            src="./assets/icons/settings.svg"
+            width={32}
+            height={32}
+            alt="ícone de usuário"
+          />
+        </Link>
         <Image
           className="user"
           src="./assets/icons/user.svg"
@@ -47,10 +46,15 @@ return (
         <span>
           {userLogged}
         </span>
-        <Link href={'/'}>
-        <button onClick={() => handleLogout()}>log out</button>
+        <Link href={'/'} className='logout' onClick={() => handleLogout()}>
+        <Image
+          className="icon"
+          src="./assets/icons/logout.svg"
+          width={32}
+          height={32}
+          alt="ícone de sair"
+        />
       </Link>
-      </div>
     </div>
   </Container>
 );
