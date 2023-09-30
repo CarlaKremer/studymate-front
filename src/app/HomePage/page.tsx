@@ -9,10 +9,12 @@ import Modal from "@/components/Modal";
 import Input from "@/components/Input";
 import Loading from "@/components/Loading";
 import api from "../../service/api";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+import { io, Socket } from 'socket.io-client';
+
 
 export default function HomePage() {
-  useRouter;
+  const router = useRouter();
   const [userName, setUserName] = useState<string>("");
   const [userEmail, setUserEmail] = useState<string>("admin@topics.com");
   const [userPassword, setUserPassword] = useState<string>("test123");
@@ -21,7 +23,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState<boolean>(false);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(true);
   const [isOpenModalSignIn, setIsOpenModalSignIn] = useState<boolean>(false);
-  
+
   const [isOpenModalNewRoom, setIsOpenModalNewRoom] = useState<boolean>(false);
   const [errorCreateRoom, setErrorCreateRoom] = useState<boolean>(false);
   const [loadingCreateRoom, setLoadingCreateRoom] = useState<boolean>(false);
@@ -45,7 +47,7 @@ export default function HomePage() {
 
         localStorage.setItem("access_token", JSON.stringify(resp.data.access_token));
         sessionStorage.setItem("access_token", JSON.stringify(resp.data.access_token));
-        
+
         setIsOpenModal(false);
         setIsOpenModalSignIn(false);
       } else {
@@ -68,9 +70,9 @@ export default function HomePage() {
         password: userPassword,
       });
 
-      const token = localStorage.getItem('access_token')?.replaceAll('"',"")
+      const token = localStorage.getItem('access_token')?.replaceAll('"', "")
 
-      const resp = await api.post("/users", raw, { headers:{'Authorization':"Bearer " + token}} );
+      const resp = await api.post("/users", raw, { headers: { 'Authorization': "Bearer " + token } });
 
       localStorage.setItem("username", JSON.stringify(resp.data.username));
       sessionStorage.setItem("username", JSON.stringify(resp.data.username));
@@ -87,7 +89,7 @@ export default function HomePage() {
     setLoading(false);
   }
 
-  async function createRoom(){
+  async function createRoom() {
     setErrorCreateRoom(false);
     setLoadingCreateRoom(true);
     try {
@@ -96,10 +98,10 @@ export default function HomePage() {
         description: descriptionNewRoom
       });
 
-      const token = localStorage.getItem('access_token')?.replaceAll('"',"")
+      const token = localStorage.getItem('access_token')?.replaceAll('"', "")
 
-      const resp = await api.post("/rooms", raw, { headers:{'Authorization':"Bearer " + token}});
-      
+      const resp = await api.post("/rooms", raw, { headers: { 'Authorization': "Bearer " + token } });
+
       loadRooms();
       setIsOpenModalNewRoom(false);
 
@@ -122,6 +124,13 @@ export default function HomePage() {
     setLoading(false);
   }
 
+  async function redirectToRoom(roomId: String) {
+    const newSocket = io('http://localhost:3090');
+
+    newSocket.emit('room_selected', roomId);
+
+    await router.push(`/StudyRoom?roomId=${roomId}`);
+  }
 
   useEffect(() => {
     loadRooms();
@@ -132,21 +141,18 @@ export default function HomePage() {
     <Container>
       <Topbar />
       <GridContainer>
-      <a onClick={()=>setIsOpenModalNewRoom(true)}>
-      <RoomCard newRoom={true} title={''} description={''} />
-      </a>
+        <a onClick={() => setIsOpenModalNewRoom(true)}>
+          <RoomCard newRoom={true} title={''} description={''} />
+        </a>
         {rooms.map((room, i) => (
-          <Link
+          <a
             key={i}
-            href={{
-              pathname: '/StudyRoom',
-              query: { roomId: room.id }
-            }}
+            onClick={(e:any) => redirectToRoom(room.id)}
           >
             <RoomCard
               title={room.title}
               description={room.description} />
-          </Link>
+          </a>
         ))}
       </GridContainer>
 
@@ -306,8 +312,8 @@ export default function HomePage() {
       </Modal>
       {/* Crete new room */}
       <Modal isOpenModal={isOpenModalNewRoom} setOpenModal={!isOpenModalNewRoom}>
-          {!loadingCreateRoom ? (
-            <ModalWrapper>
+        {!loadingCreateRoom ? (
+          <ModalWrapper>
             <div className="header">
               <button
                 onClick={() => setIsOpenModalNewRoom(false)}
@@ -347,8 +353,8 @@ export default function HomePage() {
               <button onClick={() => createRoom()}>Create!</button>
             </div>
           </ModalWrapper>
-          ):( <Loading />)}
-        </Modal>
+        ) : (<Loading />)}
+      </Modal>
     </Container>
   );
 }
