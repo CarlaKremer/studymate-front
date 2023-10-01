@@ -9,6 +9,7 @@ import Modal from "@/components/Modal";
 import Input from "@/components/Input";
 import Loading from "@/components/Loading";
 import api from "../../service/api";
+import GradientBackground from "@/components/GradientBackground";
 import { useRouter } from "next/navigation";
 import { io, Socket } from 'socket.io-client';
 
@@ -138,7 +139,7 @@ export default function HomePage() {
 
 
   return (
-    <Container>
+    <GradientBackground>
       <Topbar />
       <GridContainer>
         <a onClick={() => setIsOpenModalNewRoom(true)}>
@@ -147,7 +148,7 @@ export default function HomePage() {
         {rooms.map((room, i) => (
           <a
             key={i}
-            onClick={(e:any) => redirectToRoom(room.id)}
+            onClick={(e: any) => redirectToRoom(room.id)}
           >
             <RoomCard
               title={room.title}
@@ -355,6 +356,6 @@ export default function HomePage() {
           </ModalWrapper>
         ) : (<Loading />)}
       </Modal>
-    </Container>
+    </GradientBackground>
   );
 }

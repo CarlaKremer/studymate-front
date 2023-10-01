@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 18rem;
   height: 14rem;
-  background-color: #454859;
+  background-color: #040304;
   border-radius: 0.625rem;
+  opacity: 0.65;
   cursor: pointer;
 
   .new-room-card{

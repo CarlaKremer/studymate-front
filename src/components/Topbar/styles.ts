@@ -4,7 +4,7 @@ export const Container = styled.div`
   position: sticky;
   top: 0;
   height:5rem;
-  background-color: #454859;
+  /* background-color: #454859; */
   color: #fff;
   padding: 0.625rem 1.25rem;
   margin: 0 0 2rem 0 ;
