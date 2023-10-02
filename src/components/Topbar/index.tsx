@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Container } from './styles';
+import OutlinedButton from '../OutlinedButton';
 
 export default function Topbar(
   isLoggedChanged: any,
@@ -26,6 +27,7 @@ export default function Topbar(
 return (
   <Container>
     <p>StudyMate :D</p>
+    <OutlinedButton>new room</OutlinedButton>
     <div className='row'>
         <Link href="/Settings" className='row' >
           <Image

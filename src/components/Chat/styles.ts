@@ -3,20 +3,20 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 .chat-container {
-    width: 800px;
-    height: 800px;
+    width: 20vw;
+    height: 100%;
     margin: 0 auto;
     padding: 1rem;
     
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #484B5C;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .message-list {
     list-style: none;
     padding: 0;
     margin: 1rem 0;
-    height: 700px;
+    height: 100vh;
 
     overflow-y: auto;
     border-radius: 4px;
