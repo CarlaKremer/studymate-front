@@ -1,29 +1,40 @@
 'use client';
 import React, { useEffect, useState } from "react";
-import { Container, Column, Navigation, ScreenSharing, RoomMates, PanelContainer, PomodoroWrap, TodoWrap, ColumnSlider, Slider } from "./styles";
+import {
+  Container, Column, Navigation, ScreenSharing, RoomMates,
+  PomodoroWrap, TodoWrap, ColumnSlider, Slider
+} from "./styles";
 import Chat from "@/components/Chat";
 import Link from "next/link";
 import Image from "next/image";
 import Todo from "@/components/Todo";
 import Pomodoro from "@/components/Pomodoro";
+import { useSearchParams } from 'next/navigation';
+
 
 export default function StudyRoom() {
-  const [isOpen, setIsOpen] = useState(true);
+  const searchParams = useSearchParams()
 
+  const [isOpen, setIsOpen] = useState(true);
   const [userLogged, setUserLogged] = useState<any>(null);
 
+  const getRoomId = () => {
+    return searchParams.get('roomId')
+  }
+
   useEffect(() => {
-      const sessionStorageUser = sessionStorage.getItem("username");
-      if (sessionStorageUser != null) {
-        setUserLogged(JSON.parse(sessionStorageUser));
-      }
-    }, []);
-  return( 
+
+    const sessionStorageUser = sessionStorage.getItem("username");
+    if (sessionStorageUser != null) {
+      setUserLogged(JSON.parse(sessionStorageUser));
+    }
+  }, []);
+  return (
     <Container>
-    
-     <Column>
+
+      <Column>
         <Navigation>
-            <Link href="/">
+          <Link href="/">
             <Image
               className="arrow-icon"
               src={"./assets/icons/left.svg"}
@@ -33,24 +44,27 @@ export default function StudyRoom() {
             />
           </Link>
         </Navigation>
-        <ScreenSharing/>
-        <RoomMates/>
+        <ScreenSharing />
+        <RoomMates />
       </Column>
 
       <Slider>
         <ColumnSlider>
-            <PomodoroWrap className="wrap">
-             <Pomodoro/>
-            </PomodoroWrap>
-            <TodoWrap className="wrap">
-              <Todo/>
-            </TodoWrap>
+          <PomodoroWrap className="wrap">
+            <Pomodoro />
+          </PomodoroWrap>
+          <TodoWrap className="wrap">
+            <Todo />
+          </TodoWrap>
         </ColumnSlider>
         <Column>
-            <Chat username={userLogged} server='http://localhost:3090'/>
+          <Chat
+            username={userLogged}
+            roomId={getRoomId()}
+            server='http://localhost:3090' />
         </Column>
       </Slider>
 
-     </Container>
+    </Container>
   );
 }

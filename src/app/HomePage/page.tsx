@@ -11,7 +11,6 @@ import Loading from "@/components/Loading";
 import api from "../../service/api";
 import GradientBackground from "@/components/GradientBackground";
 import { useRouter } from "next/navigation";
-import { io, Socket } from 'socket.io-client';
 
 
 export default function HomePage() {
@@ -125,14 +124,6 @@ export default function HomePage() {
     setLoading(false);
   }
 
-  async function redirectToRoom(roomId: String) {
-    const newSocket = io('http://localhost:3090');
-
-    newSocket.emit('room_selected', roomId);
-
-    await router.push(`/StudyRoom?roomId=${roomId}`);
-  }
-
   useEffect(() => {
     loadRooms();
   }, []);
@@ -146,14 +137,17 @@ export default function HomePage() {
           <RoomCard newRoom={true} title={''} description={''} />
         </a>
         {rooms.map((room, i) => (
-          <a
+          <Link
             key={i}
-            onClick={(e: any) => redirectToRoom(room.id)}
+            href={{
+              pathname: '/StudyRoom',
+              query: { roomId: room.id }
+            }}
           >
             <RoomCard
               title={room.title}
               description={room.description} />
-          </a>
+          </Link>
         ))}
       </GridContainer>
 

@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 interface ChatProps {
     server: string;
+    roomId: any;
     username: string;
 }
 
@@ -13,33 +14,35 @@ interface Message {
     message: string;
 }
 
-export default function Chat({server, username}:ChatProps) {
+export default function Chat({ server, username, roomId }: ChatProps) {
     const [socket, setSocket] = useState<Socket | null>(null);
     const [message, setMessage] = useState<string>('');
     const [messages, setMessages] = useState<Message[]>([]);
 
     useEffect(() => {
         // Conectar ao servidor Socket.io
-        const newSocket = io(server);
-        setSocket(newSocket);
+        const socket = io(server);
+        setSocket(socket);
 
+        socket.emit('room_selected', roomId);
         // Lidar com mensagens recebidas
-        newSocket.on('message', (msg: string) => {
-            const receivedMessage = JSON.parse(msg) as Message;
-            setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+        socket.on('message', (message: Message) => {
+            console.log(message)
+            setMessages((prevMessages) => [...prevMessages, message]);
         });
 
         return () => {
             // Desconectar o socket quando o componente é desmontado
-            newSocket.disconnect();
+            socket.disconnect();
         };
+
     }, [server]);
 
     const sendMessage = () => {
         if (socket && message.trim() !== '') {
             // Enviar mensagem para o servidor
-            const messageObject = { username, message };
-            socket.emit('message', JSON.stringify(messageObject));
+            const messageObject = { username, message, roomId };
+            socket.emit('message', messageObject);
             setMessage('');
         }
     };
@@ -49,38 +52,40 @@ export default function Chat({server, username}:ChatProps) {
             sendMessage();
         }
     };
-return (
-  <Container>
-        <div>
-            <div className="chat-container">
-                <div className="message-list">
-                    {messages.map((msg, index) => (
-                        <div key={index}>
-                            <strong  className='author'>{msg.username}: </strong>
-                            <span className='message'>{msg.message}</span>
-                        </div>
-                    ))}
-                </div>
-                <div className="input-wrap">
-                    <input
-                        className='message-input'
-                        type="text"
-                        placeholder="Digite sua mensagem..."
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        onKeyDown={handleKeyPress}
-                    />
-                    <button className='button-input' onClick={sendMessage}> 
-                    <Image
-                        alt="ícone de enviar"
-                        src={"./assets/icons/send.svg"}
-                        width={12}
-                        height={12}
+
+
+    return (
+        <Container>
+            <div>
+                <div className="chat-container">
+                    <div className="message-list">
+                        {messages.map((msg, index) => (
+                            <div key={index}>
+                                <strong className='author'>{msg.username}: </strong>
+                                <span className='message'>{msg.message}</span>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="input-wrap">
+                        <input
+                            className='message-input'
+                            type="text"
+                            placeholder="Digite sua mensagem..."
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            onKeyDown={handleKeyPress}
                         />
-                    </button>
+                        <button className='button-input' onClick={sendMessage}>
+                            <Image
+                                alt="ícone de enviar"
+                                src={"./assets/icons/send.svg"}
+                                width={12}
+                                height={12}
+                            />
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-      </Container>
-);
+        </Container>
+    );
 }
