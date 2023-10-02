@@ -1,20 +1,21 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: #1D1C26;
+  background-color: #010042;
   box-sizing: border-box;
   padding: 0 0 0 2rem;
-  width: 100%;
-  height: 100vh;
+  width: 100vw;
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
 `;
 
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  padding-right: 1rem;
   gap: 1rem;
 `;
 
@@ -39,25 +40,25 @@ export const Navigation = styled.div`
   top: 0;
   width: 30rem;
   height:5rem;
-  background-color: #484B5C;
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 0 0 1rem 1rem;
   
 `;
 
 export const ScreenSharing = styled.div`
   width: 30rem;
-  height: 30rem;
+  height: 18rem;
   border-radius: 1rem;
 
-  background-color: #484B5C;
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 export const RoomMates = styled.div`
   width: 20rem;
   height: 8rem;
-  border-radius: 1rem;
+  border-radius: 1rem 1rem 0rem 0rem;
 
-  background-color: #484B5C;
+  background-color: rgba(0, 0, 0, 0.4);
 `;
 
 export const Slider = styled.div`
@@ -69,17 +70,17 @@ export const Slider = styled.div`
 
 export const PomodoroWrap = styled.div`
   width: 18rem;
-  height: 15rem;
   border-radius: 1rem 0 0 0 ;
-  background-color: #363847;  
-  border-bottom: 1px solid #484B5C;
+  background-color: #000;
+  opacity: 0.75;
+  border-bottom: 1px solid #000;
 `;
 
 export const TodoWrap = styled.div`
   width: 100%;
   height: 35rem;
   border-radius: 0 0 0 1rem;
-  background-color: #363847;
+  background-color: rgba(0, 0, 0, 0.65);
 `;
 
 export const PanelContainer = styled.div``;
