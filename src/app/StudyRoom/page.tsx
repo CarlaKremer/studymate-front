@@ -34,7 +34,7 @@ export default function StudyRoom() {
 
       <Column>
         <Navigation>
-          <Link href="/">
+          <Link href="/HomePage">
             <Image
               className="arrow-icon"
               src={"./assets/icons/left.svg"}
