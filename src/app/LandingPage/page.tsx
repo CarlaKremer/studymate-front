@@ -21,7 +21,13 @@ import api from "../../service/api";
 import GradientBackground from "@/components/GradientBackground";
 import { useRouter } from "next/navigation";
 
-
+interface PropsResponse {
+  data:{
+    username:string, 
+    access_token:string, 
+    id:string
+  }
+}
 const LandingPage: React.FC = () => {
   const router = useRouter();
   const [userName, setUserName] = useState<string>("");
@@ -32,6 +38,17 @@ const LandingPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [isOpenModalSignIn, setIsOpenModalSignIn] = useState<boolean>(false);
+
+  function setItensOnStorage(resp:PropsResponse){
+    localStorage.setItem("username", JSON.stringify(resp.data.username));
+    sessionStorage.setItem("username", JSON.stringify(resp.data.username));
+
+    localStorage.setItem("access_token", JSON.stringify(resp.data.access_token));
+    sessionStorage.setItem("access_token", JSON.stringify(resp.data.access_token));
+
+    localStorage.setItem("id", JSON.stringify(resp.data.id));
+    sessionStorage.setItem("id", JSON.stringify(resp.data.id));
+  }
 
   async function authenticateUser() {
     setError(false);
@@ -45,14 +62,7 @@ const LandingPage: React.FC = () => {
       const resp = await api.post("/auth/login", raw);
 
       if (resp.status === 200) {
-        console.log(' ', resp.data);
-        localStorage.setItem("username", JSON.stringify(resp.data.username));
-        sessionStorage.setItem("username", JSON.stringify(resp.data.username));
-        sessionStorage.setItem("id", JSON.stringify(resp.data.id));
-
-        localStorage.setItem("access_token", JSON.stringify(resp.data.access_token));
-        sessionStorage.setItem("access_token", JSON.stringify(resp.data.access_token));
-        sessionStorage.setItem("id", JSON.stringify(resp.data.id));
+        setItensOnStorage(resp);
 
         setIsOpenModal(false);
         setIsOpenModalSignIn(false);
@@ -81,11 +91,7 @@ const LandingPage: React.FC = () => {
 
       const resp = await api.post("/users", raw, { headers: { 'Authorization': "Bearer " + token } });
 
-      localStorage.setItem("username", JSON.stringify(resp.data.username));
-      sessionStorage.setItem("username", JSON.stringify(resp.data.username));
-
-      localStorage.setItem("access_token", resp.data.access_token);
-      sessionStorage.setItem("access_token", JSON.stringify(resp.data.access_token));
+      setItensOnStorage(resp)
 
       setIsOpenModal(false);
       setIsOpenModalSignIn(false);
