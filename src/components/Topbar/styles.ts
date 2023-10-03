@@ -45,4 +45,9 @@ export const Container = styled.div`
     color: #FAFAFA;
     font-size: 16px;
   }
+
+  Link{
+    color: #FAFAFA;
+    font-size: 16px;
+  }
 `;

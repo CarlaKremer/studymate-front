@@ -4,10 +4,16 @@ import Link from 'next/link';
 import { Container } from './styles';
 import OutlinedButton from '../OutlinedButton';
 
-export default function Topbar(
-  isLoggedChanged: any,
-  isLoggedChangedSignUp: any
-) {
+type Props = {
+  isLoggedChanged?:any,
+  isLoggedChangedSignUp?:any,
+  handleOpenModalNewRoom: any;
+}
+export default function Topbar({
+  isLoggedChanged,
+  isLoggedChangedSignUp,
+  handleOpenModalNewRoom
+}: Props) {
   const [userLogged, setUserLogged] = useState<any>(null);
 
   function handleLogout() {
@@ -27,35 +33,15 @@ export default function Topbar(
 return (
   <Container>
     <p>StudyMate :D</p>
-    <OutlinedButton>new room</OutlinedButton>
+    <OutlinedButton onClick={handleOpenModalNewRoom}>new room</OutlinedButton>
     <div className='row'>
         <Link href="/Settings" className='row' >
-          <Image
-            className="icon"
-            src="./assets/icons/settings.svg"
-            width={32}
-            height={32}
-            alt="ícone de usuário"
-          />
-        </Link>
-        <Image
-          className="user"
-          src="./assets/icons/user.svg"
-          width={32}
-          height={32}
-          alt="ícone de usuário"
-        />
-        <span>
-          {userLogged}
-        </span>
-        <Link href={'/'} className='logout' onClick={() => handleLogout()}>
-        <Image
-          className="icon"
-          src="./assets/icons/logout.svg"
-          width={32}
-          height={32}
-          alt="ícone de sair"
-        />
+          <span className='row' >
+            {userLogged}
+          </span>
+        </Link >
+        <Link className='row'  href={'/'} onClick={() => handleLogout()}>
+          <span>Sair</span>
       </Link>
     </div>
   </Container>
