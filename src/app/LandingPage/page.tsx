@@ -45,11 +45,14 @@ const LandingPage: React.FC = () => {
       const resp = await api.post("/auth/login", raw);
 
       if (resp.status === 200) {
+        console.log(' ', resp.data);
         localStorage.setItem("username", JSON.stringify(resp.data.username));
         sessionStorage.setItem("username", JSON.stringify(resp.data.username));
+        sessionStorage.setItem("id", JSON.stringify(resp.data.id));
 
         localStorage.setItem("access_token", JSON.stringify(resp.data.access_token));
         sessionStorage.setItem("access_token", JSON.stringify(resp.data.access_token));
+        sessionStorage.setItem("id", JSON.stringify(resp.data.id));
 
         setIsOpenModal(false);
         setIsOpenModalSignIn(false);
