@@ -5,24 +5,26 @@ import Link from "next/link";
 import { Container, TopBar, ConfigContainer } from './styles';
 import api from "../../service/api";
 import EditForm from '@/components/EditForm';
+import RoomItem from '@/components/RoomItem';
+import { ListContainer } from '@/components/RoomItem/styles';
 
 
 export default function Settings() {
   const [rooms, setRooms] = useState<any[]>([]);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [token, setToken] = useState<String | undefined>('');
 
   async function loadRooms() {
     setError(false);
     setLoading(true);
     try {
       const id = localStorage.getItem('id')?.replaceAll('"', "");
-      console.log(id)
-      const token = localStorage.getItem('access_token')?.replaceAll('"', "")
-      const res = await api.get(`/rooms/author/${id}`, { headers: { 'Authorization': "Bearer " + token } });
-      setRooms(res.data);
-      console.log(res.data)
+      setToken(localStorage.getItem('access_token')?.replaceAll('"', ""))
+      const res = await api
+        .get(`/rooms/author/${id}`, { headers: { 'Authorization': "Bearer " + token } });
+
+        setRooms(res.data);
     } catch (error) {
       setError(true);
       console.log(error);
@@ -32,7 +34,7 @@ export default function Settings() {
 
   useEffect(() => {
     loadRooms();
-  }, []);
+  });
 
   return (
     <Container>
@@ -45,19 +47,17 @@ export default function Settings() {
 
       <ConfigContainer>
         <EditForm initialEmail='' initialUsername='' onSubmit={() => { }} />
-        <div>
+        <ListContainer>
           {rooms.map((room, i) => (
-            <Link
+            <RoomItem
               key={i}
-              href={{
-                pathname: '/StudyRoom',
-                query: { roomId: room.id }
-              }}
-            >
-              <p>{room.title}</p>
-            </Link>
+              description={room.description}
+              title={room.title}
+              id={room.id}
+              token={token}
+            />
           ))}
-        </div>
+        </ListContainer>
       </ConfigContainer>
     </Container>
   );
