@@ -56,34 +56,32 @@ export default function Chat({ server, username, roomId }: ChatProps) {
 
     return (
         <Container>
-            <div>
-                <div className="chat-container">
-                    <div className="message-list">
-                        {messages.map((msg, index) => (
-                            <div key={index}>
-                                <strong className='author'>{msg.username}: </strong>
-                                <span className='message'>{msg.message}</span>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="input-wrap">
-                        <input
-                            className='message-input'
-                            type="text"
-                            placeholder="Digite sua mensagem..."
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            onKeyDown={handleKeyPress}
+            <div className="chat-container">
+                <div className="message-list">
+                    {messages.map((msg, index) => (
+                        <div key={index}>
+                            <strong className='author'>{msg.username}: </strong>
+                            <span className='message'>{msg.message}</span>
+                        </div>
+                    ))}
+                </div>
+                <div className="input-wrap">
+                    <input
+                        className='message-input'
+                        type="text"
+                        placeholder="Digite sua mensagem..."
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        onKeyDown={handleKeyPress}
+                    />
+                    <button className='button-input' onClick={sendMessage}>
+                        <Image
+                            alt="ícone de enviar"
+                            src={"./assets/icons/send.svg"}
+                            width={12}
+                            height={12}
                         />
-                        <button className='button-input' onClick={sendMessage}>
-                            <Image
-                                alt="ícone de enviar"
-                                src={"./assets/icons/send.svg"}
-                                width={12}
-                                height={12}
-                            />
-                        </button>
-                    </div>
+                    </button>
                 </div>
             </div>
         </Container>

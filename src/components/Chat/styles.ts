@@ -2,21 +2,25 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+height: 100vh;
+
 .chat-container {
-    width: 20vw;
-    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
     margin: 0 auto;
     padding: 1rem;
     
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .message-list {
     list-style: none;
     padding: 0;
     margin: 1rem 0;
-    height: 100vh;
+    height: 100%;
 
     overflow-y: auto;
     border-radius: 4px;
