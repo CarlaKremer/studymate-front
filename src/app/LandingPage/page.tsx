@@ -106,7 +106,7 @@ const LandingPage: React.FC = () => {
 
   return (
     <>
-    <Container>
+    <GradientBackground>
       <Header>
         <h1>Study Mate</h1>
       </Header>
@@ -119,7 +119,7 @@ const LandingPage: React.FC = () => {
         </ButtonContainer>
       </Hero>
 
-    </Container>
+    </GradientBackground>
 
       {/* Login */}
       <Modal isOpenModal={isOpenModal} setOpenModal={!isOpenModal}>
