@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: #010042;
+  background: radial-gradient(circle at bottom, #EC6E80, #010042);
   box-sizing: border-box;
   padding: 0 0 0 2rem;
   width: 100vw;
@@ -22,6 +22,7 @@ export const Column = styled.div`
 export const ColumnSlider = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100vh;
 
   .wrap{
     padding: 1rem;

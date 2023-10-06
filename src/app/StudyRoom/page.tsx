@@ -57,12 +57,10 @@ export default function StudyRoom() {
             <Todo />
           </TodoWrap>
         </ColumnSlider>
-        <Column>
-          <Chat
-            username={userLogged}
-            roomId={getRoomId()}
-            server='http://localhost:3090' />
-        </Column>
+        <Chat
+          username={userLogged}
+          roomId={getRoomId()}
+          server='http://localhost:3090' />
       </Slider>
 
     </Container>
