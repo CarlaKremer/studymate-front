@@ -79,7 +79,7 @@ export const PomodoroWrap = styled.div`
 
 export const TodoWrap = styled.div`
   width: 100%;
-  height: 35rem;
+  height: 70%;
   border-radius: 0 0 0 1rem;
   background-color: rgba(0, 0, 0, 0.65);
 `;
