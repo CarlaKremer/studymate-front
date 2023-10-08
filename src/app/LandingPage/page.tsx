@@ -1,19 +1,14 @@
 'use client';
 import {
-  Container,
   Header,
-  HeaderItems,
   ButtonContainer,
   Button,
-  GridContainer, 
   ModalWrapper
 } from './styles';
 import Hero from '@/components/Hero';
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Topbar from "@/components/Topbar";
-import RoomCard from "@/components/RoomCard";
 import Modal from "@/components/Modal";
 import Input from "@/components/Input";
 import Loading from "@/components/Loading";

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Topbar from "@/components/Topbar";
-import RoomCard from "@/components/RoomCard";
+import Card from "@/components/Card";
 import Modal from "@/components/Modal";
 import Input from "@/components/Input";
 import Loading from "@/components/Loading";
@@ -75,9 +75,6 @@ export default function HomePage() {
       <Topbar handleOpenModalNewRoom={handleOpenModalNewRoom} />
       {loading ? <Loading /> : (
       <GridContainer>
-        <a onClick={() => setIsOpenModalNewRoom(true)}>
-          <RoomCard newRoom={true} title={''} description={''} />
-        </a>
         {rooms.map((room, i) => (
           <Link
             key={i}
@@ -86,7 +83,7 @@ export default function HomePage() {
               query: { roomId: room.id }
             }}
           >
-            <RoomCard
+            <Card
               title={room.title}
               description={room.description} />
           </Link>
