@@ -11,9 +11,10 @@ interface RoomItemProps {
   description: string;
   id: string;
   token?: any;
+  onSubmit:()=>void;
 }
 
-const RoomItem: React.FC<RoomItemProps> = ({ title, description, id, token }) => {
+const RoomItem: React.FC<RoomItemProps> = ({ title, description, id, token,onSubmit }) => {
 
   const deleteRoom = async () => {
     try {
@@ -38,8 +39,10 @@ const RoomItem: React.FC<RoomItemProps> = ({ title, description, id, token }) =>
         <p>{description}</p>
       </Link>
 
-      <a href="#">edit</a>
-      <a onClick={() => deleteRoom()}>delete</a>
+      <div className="options">
+        <a onClick={()=>onSubmit()}>Editar</a>
+        <a className='delete' onClick={() => deleteRoom()}>Deletar</a>
+      </div>
     </Container>
   );
 };

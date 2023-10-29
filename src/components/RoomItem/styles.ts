@@ -5,27 +5,42 @@ export const Container = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
+  width: 50vw;
   height: 5rem;
   padding: 2rem;
   margin: 1rem;
   background-color: #040304;
   border-radius: 0.625rem;
   opacity: 0.65;
+  
 
-  a:hover {
-    filter: brightness(1.1);
-    color: #5BB3AE;
-    cursor: pointer;
+  .options{
+    a{
+      margin-left: 1rem;
+    }
+    a:hover {
+      filter: brightness(1.1);
+      color: #5BB3AE;
+      cursor: pointer;
+    }
+    .delete:hover {
+    color: red
   }
+  }
+
 `;
 
 export const ListContainer = styled.div`
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  align-content: end;
-  width: 50%;
-  max-height: 25rem;
+  
   margin: 0;
+`;
+
+export const Wrap = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+ 
 `;

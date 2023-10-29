@@ -2,31 +2,38 @@ import React, { useState } from 'react';
 
 import { FormContainer, Form, Label, Input, Button } from './styles'
 
-
 interface EditFormProps {
-    initialEmail: string;
-    initialUsername: string;
-    onSubmit: (email: string, username: string) => void;
+    newEmail: any;
+    setNewEmail: any;
+    newUsername: any;
+    setNewUsername: any;
+    onSubmit: () => void;
 }
 
-const EditForm: React.FC<EditFormProps> = ({ initialEmail, initialUsername, onSubmit }) => {
-    const [email, setEmail] = useState(initialEmail);
-    const [username, setUsername] = useState(initialUsername);
+const EditForm: React.FC<EditFormProps> = ({ 
+    newEmail,
+    setNewEmail, 
+    newUsername, 
+    setNewUsername,
+    onSubmit
+}) => {
+    
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onSubmit(email, username);
+        onSubmit();
     };
 
     return (
         <FormContainer>
+            <p>Atualizar perfil</p>
             <Form onSubmit={handleSubmit}>
                 <div>
                     <Label>Email:</Label>
                     <Input
                         type="email"
-                        value={email}
-                        onChange={(e: any) => setEmail(e.target.value)}
+                        value={newEmail}
+                        onChange={(e: any) => setNewEmail(e.target.value)}
                         required
                     />
                 </div>
@@ -34,8 +41,8 @@ const EditForm: React.FC<EditFormProps> = ({ initialEmail, initialUsername, onSu
                     <Label>Username:</Label>
                     <Input
                         type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        value={newUsername}
+                        onChange={(e) => setNewUsername(e.target.value)}
                         required
                     />
                 </div>
