@@ -1,16 +1,15 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Link from "next/link";
-
-import { Container, TopBar, ConfigContainer, SideBar, ModalWrapper } from './styles';
+import Image from 'next/image';
+import { Container, TopBar, SideBar, ModalWrapper } from './styles';
 import api from "../../service/api";
-import EditForm from '@/components/EditForm';
-import RoomItem from '@/components/RoomItem';
-import { ListContainer } from '@/components/RoomItem/styles';
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Modal from '@/components/Modal';
-import Image from 'next/image';
+import EditForm from '@/components/EditForm';
+import RoomItem from '@/components/RoomItem';
+import { ListContainer } from '@/components/RoomItem/styles';
 import Input from "@/components/Input";
 import Loading from "@/components/Loading";
 
@@ -39,7 +38,9 @@ export default function Settings() {
     setLoading(true);
     try {
       const id = localStorage.getItem('id')?.replaceAll('"', "");
+      
       const res = await api.get(`/rooms/author/${id}`);
+
       if(res.status === 200){
         setRooms(res.data);
       }
@@ -60,9 +61,9 @@ export default function Settings() {
         email: email
       });
       const id = localStorage.getItem('id')?.replaceAll('"', "");
-      setToken(localStorage.getItem('access_token')?.replaceAll('"', ""))
+
       const res = await api.put(`/users/${id}`,data);
-      setRooms(res.data);
+      
       if(res.status == 200){
         setNewEmail('');
         setNewUsername('');
@@ -79,7 +80,6 @@ export default function Settings() {
     setErrorEditRoom(false);
     setLoading(true);
     try {
-      setToken(localStorage.getItem('access_token')?.replaceAll('"', ""))
       let data = JSON.stringify({
         description: newDescription
       });
@@ -88,7 +88,7 @@ export default function Settings() {
 
       if(res.status == 200){
         setIsOpenModalEditRoom(false)
-        notifyUpdated(`Nome da sala alterada para ${newDescription}`)
+        notifyUpdated(`Descrição da sala alterada para ${newDescription}`)
         loadRooms();
       }
     } catch (error) {
@@ -98,8 +98,35 @@ export default function Settings() {
     setLoading(false);
   }
 
+  async function deleteRoom (id:number) {
+    try {
+      const res = await api
+        .delete(`/rooms/${id}`);
+
+      if (res.status == 200) {
+        loadRooms()
+        notifyDelete('A sala foi deletada')
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   function notifyUpdated(text: string) {
     toast.success(text, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+  }
+
+  function notifyDelete(text: string) {
+    toast.warn(text, {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -118,6 +145,10 @@ export default function Settings() {
 
   useEffect(() => {
     loadRooms();
+  },[]);
+
+  useEffect(() => {
+    setToken(localStorage.getItem('access_token')?.replaceAll('"', ""));
   },[]);
 
   return (
@@ -140,32 +171,35 @@ export default function Settings() {
         </Link>
       </TopBar>
 
-      {isPersonalActive()?
-        <>
-         <EditForm 
-            newEmail={newEmail} 
-            setNewEmail={setNewEmail} 
-            newUsername={newUsername} 
-            setNewUsername={setNewUsername}
-            onSubmit={() =>{editUser(newUsername, newEmail)}}
-            />
-        </>
-        :<>
-           <ListContainer>
-            <h2>Editar salas:</h2>
-            {rooms.map((room, i) => (
-              <RoomItem
-                key={i}
-                description={room.description}
-                title={room.title}
-                id={room.id}
-                token={token}
-                onSubmit={()=>openModal(room.id)}
+      {loading ? <Loading/>: <>
+        {isPersonalActive()?
+          <>
+          <EditForm 
+              newEmail={newEmail} 
+              setNewEmail={setNewEmail} 
+              newUsername={newUsername} 
+              setNewUsername={setNewUsername}
+              onSubmit={() =>{editUser(newUsername, newEmail)}}
               />
-            ))}
-        </ListContainer>
-        </>
-      }
+          </>
+          :<>
+            <ListContainer>
+              <h2>Editar salas:</h2>
+              {rooms.map((room, i) => (
+                <RoomItem
+                  key={i}
+                  description={room.description}
+                  title={room.title}
+                  id={room.id}
+                  token={token}
+                  onSubmit={()=>openModal(room.id)}
+                  onDelete={()=>deleteRoom(room.id)}
+                />
+              ))}
+          </ListContainer>
+          </>
+        }
+      </>}
      <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -181,7 +215,7 @@ export default function Settings() {
         <ToastContainer />
 
     </Container>
-      <Modal isOpenModal={isOpenModalEditRoom} setOpenModal={!isOpenModalEditRoom}>
+    <Modal isOpenModal={isOpenModalEditRoom} setOpenModal={!isOpenModalEditRoom}>
       {!loadingEditRoom ? (
         <ModalWrapper>
           <div className="header">

@@ -34,12 +34,12 @@ export default function HomePage() {
         description: descriptionNewRoom
       });
 
-      const token = localStorage.getItem('access_token')?.replaceAll('"', "")
+      const resp = await api.post("/rooms", raw);
 
-      const resp = await api.post("/rooms", raw, { headers: { 'Authorization': "Bearer " + token } });
-
-      loadRooms();
-      setIsOpenModalNewRoom(false);
+      if(resp.status === 201) {
+        loadRooms();
+        setIsOpenModalNewRoom(false);
+      }
 
     } catch (error) {
       setErrorCreateRoom(true);
@@ -53,7 +53,10 @@ export default function HomePage() {
     setLoading(true);
     try {
       const res = await api.get("/rooms");
-      setRooms(res.data);
+      
+      if(res.status === 200) {
+        setRooms(res.data);
+      }
     } catch (error) {
       setError(true);
       console.log(error);

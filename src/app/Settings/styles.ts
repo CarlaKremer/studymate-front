@@ -55,17 +55,6 @@ export const TopBar = styled.div`
   }
 `;
 
-export const ConfigContainer = styled.div`
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 2rem;
-    margin: 2rem;
-    height: 100%;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-`;
-
 export const SideBar = styled.div`
   position: fixed;
   width: 10vw;
