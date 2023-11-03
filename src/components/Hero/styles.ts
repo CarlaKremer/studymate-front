@@ -9,6 +9,10 @@ export const HeroContainer = styled.div`
   padding: 2rem;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    height: 100vh;
+  }
 `;
 
 export const TextContainer = styled.div`
@@ -17,6 +21,7 @@ export const TextContainer = styled.div`
   justify-content: center;
   align-self: center;
   padding: 20px;
+  
 `;
 
 export const Text = styled.p`
