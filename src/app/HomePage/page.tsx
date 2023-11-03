@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Topbar from "@/components/Topbar";
+import ResponsiveTopBar from "@/components/ReponsiveTopBar";
 import Card from "@/components/Card";
 import Modal from "@/components/Modal";
 import Input from "@/components/Input";
@@ -76,6 +77,7 @@ export default function HomePage() {
   return (
     <GradientBackground>
       <Topbar handleOpenModalNewRoom={handleOpenModalNewRoom} />
+      <ResponsiveTopBar  handleOpenModalNewRoom={handleOpenModalNewRoom}/>
       {loading ? <Loading /> : (
       <GridContainer>
         {rooms.map((room, i) => (
@@ -111,10 +113,10 @@ export default function HomePage() {
               </button>
             </div>
             <div className="body">
-              <h1>Create a new room !</h1>
+              <h3>Nova sala !</h3>
               <Input
                 className="input"
-                placeholder="Name"
+                placeholder="Nome"
                 onChange={(e: any) => {
                   setNameNewRoom(e);
                 }}
@@ -123,7 +125,7 @@ export default function HomePage() {
 
               <Input
                 className="input"
-                placeholder="Description"
+                placeholder="Descrição..."
                 onChange={(e: any) => {
                   setDescriptionNewRoom(e);
                 }}
@@ -134,7 +136,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="footer">
-              <button onClick={() => createRoom()}>Create!</button>
+              <button onClick={() => createRoom()}>Criar!</button>
             </div>
           </ModalWrapper>
         ) : (<Loading />)}

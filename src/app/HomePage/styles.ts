@@ -23,7 +23,7 @@ export const ModalWrapper = styled.div`
   }
   .body{
     width: 100%;
-    h1{
+    h3{
       color:#f9f9f9;
       margin-bottom: 1rem;
     }

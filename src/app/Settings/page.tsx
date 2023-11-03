@@ -12,6 +12,7 @@ import RoomItem from '@/components/RoomItem';
 import { ListContainer } from '@/components/RoomItem/styles';
 import Input from "@/components/Input";
 import Loading from "@/components/Loading";
+import ResponsiveSideBar from '@/components/ReponsiveSideBar';
 
 
 export default function Settings() {
@@ -163,6 +164,7 @@ export default function Settings() {
       onClick={()=>setConfigIndex('editRooms')}
       >Editar sala</button>
     </SideBar>
+    <ResponsiveSideBar isPersonalActive={isPersonalActive()} setConfigIndex={setConfigIndex}/>
 
     <Container>
       <TopBar>
@@ -170,36 +172,37 @@ export default function Settings() {
           <p>Salas</p>
         </Link>
       </TopBar>
-
-      {loading ? <Loading/>: <>
-        {isPersonalActive()?
-          <>
-          <EditForm 
-              newEmail={newEmail} 
-              setNewEmail={setNewEmail} 
-              newUsername={newUsername} 
-              setNewUsername={setNewUsername}
-              onSubmit={() =>{editUser(newUsername, newEmail)}}
-              />
-          </>
-          :<>
-            <ListContainer>
-              <h2>Editar salas:</h2>
-              {rooms.map((room, i) => (
-                <RoomItem
-                  key={i}
-                  description={room.description}
-                  title={room.title}
-                  id={room.id}
-                  token={token}
-                  onSubmit={()=>openModal(room.id)}
-                  onDelete={()=>deleteRoom(room.id)}
+      <div className="content">
+        {loading ? <Loading/>: <>
+          {isPersonalActive()?
+            <>
+            <EditForm
+                newEmail={newEmail}
+                setNewEmail={setNewEmail}
+                newUsername={newUsername}
+                setNewUsername={setNewUsername}
+                onSubmit={() =>{editUser(newUsername, newEmail)}}
                 />
-              ))}
-          </ListContainer>
-          </>
-        }
-      </>}
+            </>
+            :<>
+              <ListContainer>
+                <h2>Editar salas:</h2>
+                {rooms.map((room, i) => (
+                  <RoomItem
+                    key={i}
+                    description={room.description}
+                    title={room.title}
+                    id={room.id}
+                    token={token}
+                    onSubmit={()=>openModal(room.id)}
+                    onDelete={()=>deleteRoom(room.id)}
+                  />
+                ))}
+              </ListContainer>
+            </>
+          }
+        </>}
+      </div>
      <ToastContainer
         position="top-right"
         autoClose={5000}

@@ -10,6 +10,9 @@ const Gradient = styled.div`
   font-size: 24px;
   box-sizing: border-box;
   justify-content: start;
+  @media (max-width: 1049px) {
+    height: 100%
+  }
 `;
 
 export default Gradient;

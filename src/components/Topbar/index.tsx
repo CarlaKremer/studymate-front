@@ -22,6 +22,7 @@ export default function Topbar({
     // router.push("/Home");
     window.location.reload();
   }
+
   
   useEffect(() => {
     const sessionStorageUser = sessionStorage.getItem("username");
@@ -32,18 +33,18 @@ export default function Topbar({
   
 return (
   <Container>
-    <p>StudyMate :D</p>
-    <OutlinedButton onClick={handleOpenModalNewRoom}>new room</OutlinedButton>
-    <div className='row'>
-        <Link href="/Settings" className='row' >
-          <span className='row' >
-            {userLogged}
-          </span>
-        </Link >
-        <Link className='row'  href={'/'} onClick={() => handleLogout()}>
-          <span>Sair</span>
-      </Link>
-    </div>
+      <p>StudyMate</p>
+      <OutlinedButton onClick={handleOpenModalNewRoom}>new room</OutlinedButton>
+      <div className='row' id="">
+          <Link href="/Settings" className='row' >
+            <span className='row' >
+              {userLogged}
+            </span>
+          </Link >
+          <Link className='row'  href={'/'} onClick={() => handleLogout()}>
+            <span>Sair</span>
+        </Link>
+      </div>
   </Container>
 );
 }

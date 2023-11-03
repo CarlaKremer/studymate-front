@@ -12,6 +12,9 @@ export const Container = styled.div`
   background-color: #040304;
   border-radius: 0.625rem;
   opacity: 0.65;
+  @media (max-width: 1024px) {
+    width:100%;
+  }
   
 
   .options{

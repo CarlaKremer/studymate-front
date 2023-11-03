@@ -1,12 +1,22 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100vh;
-    background: radial-gradient(circle at top, #F3B5B9, #010042);
-    padding-left: 30vh;
+  background: radial-gradient(circle at top, #F3B5B9, #010042);
+.content{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  padding-left: 30vh;
+
+}
+    @media (max-width: 1024px) {
+      .content{
+        width: 100%;
+        padding: 0vw 10vw;
+      }
+      /* align-items: center; */
+    }
 `;
 
 export const TopBar = styled.div`
@@ -90,6 +100,10 @@ export const SideBar = styled.div`
   background-color: #5BB3AE;
   opacity: 1;
  }
+
+ @media (max-width: 1024px) {
+    display: none;
+  }
 
 `;
 
