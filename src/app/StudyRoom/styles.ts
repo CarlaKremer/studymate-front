@@ -46,14 +46,6 @@ export const Navigation = styled.div`
   
 `;
 
-export const ScreenSharing = styled.div`
-  width: 30rem;
-  height: 18rem;
-  border-radius: 1rem;
-
-  background-color: rgba(0, 0, 0, 0.5);
-`;
-
 export const RoomMates = styled.div`
   width: 20rem;
   height: 8rem;

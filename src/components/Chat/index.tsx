@@ -24,7 +24,7 @@ export default function Chat({ server, username, roomId }: ChatProps) {
         const socket = io(server);
         setSocket(socket);
 
-        socket.emit('room_selected', roomId);
+        socket.emit('room_selected', {roomId});
         // Lidar com mensagens recebidas
         socket.on('message', (message: Message) => {
             console.log(message)

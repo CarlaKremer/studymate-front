@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from "react";
 import {
-  Container, Column, Navigation, ScreenSharing, RoomMates,
+  Container, Column, Navigation, RoomMates,
   PomodoroWrap, TodoWrap, ColumnSlider, Slider
 } from "./styles";
 import Chat from "@/components/Chat";
@@ -10,6 +10,7 @@ import Image from "next/image";
 import Todo from "@/components/Todo";
 import Pomodoro from "@/components/Pomodoro";
 import { useSearchParams } from 'next/navigation';
+import ScreenSharing from "@/components/ScreenSharing";
 
 
 export default function StudyRoom() {
@@ -44,7 +45,9 @@ export default function StudyRoom() {
             />
           </Link>
         </Navigation>
-        <ScreenSharing />
+        <ScreenSharing
+          roomId={getRoomId()}
+          server='http://localhost:3090' />
         <RoomMates />
       </Column>
 
