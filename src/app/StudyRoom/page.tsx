@@ -30,9 +30,10 @@ export default function StudyRoom() {
   const requestLivekitToken = async () => {
     setLoading(true);
     try {
+      console.log(searchParams.get('roomTitle'))
       const raw = JSON.stringify({
-        userName: userLogged,
-        roomName: getRoomId(),
+        userName: sessionStorage.getItem("username"),
+        roomName: searchParams.get('roomTitle'),
       });
 
       const token = localStorage.getItem('access_token')?.replaceAll('"', "")
@@ -48,11 +49,11 @@ export default function StudyRoom() {
   }
 
   useEffect(() => {
-    requestLivekitToken();
     const sessionStorageUser = sessionStorage.getItem("username");
     if (sessionStorageUser != null) {
       setUserLogged(JSON.parse(sessionStorageUser));
     }
+    requestLivekitToken();
   }, []);
   return (
     <Container>

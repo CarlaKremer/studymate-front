@@ -20,7 +20,7 @@ export default function VideoCall({ token }: { token: string }) {
             video={false}
             audio={false}
             token={token}
-            connectOptions={{ autoSubscribe: true }}
+            connectOptions={{ autoSubscribe: false }}
             serverUrl={serverUrl}
             // Use the default LiveKit theme for nice styles.
             data-lk-theme="default"
@@ -45,7 +45,6 @@ const MyVideoConference = () => {
             { source: Track.Source.Camera, withPlaceholder: true },
             { source: Track.Source.Microphone, withPlaceholder: true },
         ],
-        { onlySubscribed: false },
     );
     return (
         <GridLayout tracks={tracks}
