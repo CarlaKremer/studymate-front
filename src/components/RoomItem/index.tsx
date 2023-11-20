@@ -11,21 +11,11 @@ interface RoomItemProps {
   description: string;
   id: string;
   token?: any;
+  onSubmit:()=>void;
+  onDelete:()=>void;
 }
 
-const RoomItem: React.FC<RoomItemProps> = ({ title, description, id, token }) => {
-
-  const deleteRoom = async () => {
-    try {
-      const res = await api
-        .delete(`/rooms/${id}`, { headers: { 'Authorization': "Bearer " + token } });
-
-      if (res.status == 200) router.push("/Settings");
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
+const RoomItem: React.FC<RoomItemProps> = ({ title, description, id, token, onSubmit,onDelete }) => {
   return (
     <Container>
       <Link
@@ -38,8 +28,10 @@ const RoomItem: React.FC<RoomItemProps> = ({ title, description, id, token }) =>
         <p>{description}</p>
       </Link>
 
-      <a href="#">edit</a>
-      <a onClick={() => deleteRoom()}>delete</a>
+      <div className="options">
+        <a onClick={()=>onSubmit()}>Editar</a>
+        <a className='delete' onClick={() => onDelete()}>Deletar</a>
+      </div>
     </Container>
   );
 };

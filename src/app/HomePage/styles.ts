@@ -1,17 +1,10 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-  background-color: #1D1C26;
-  
-`;
 
 export const GridContainer = styled.div`
   display: grid;
   justify-content: center;
+  align-items: flex-start;
   padding: 2rem;
   grid-template-columns: repeat(auto-fill, 20rem);
   grid-auto-rows: 16rem;
@@ -30,7 +23,7 @@ export const ModalWrapper = styled.div`
   }
   .body{
     width: 100%;
-    h1{
+    h3{
       color:#f9f9f9;
       margin-bottom: 1rem;
     }

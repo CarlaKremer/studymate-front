@@ -82,11 +82,11 @@ const LandingPage: React.FC = () => {
         password: userPassword,
       });
 
-      const token = localStorage.getItem('access_token')?.replaceAll('"', "")
+      const resp = await api.post("/users", raw);
 
-      const resp = await api.post("/users", raw, { headers: { 'Authorization': "Bearer " + token } });
-
-      setItensOnStorage(resp)
+      if(resp.status === 200) {
+        setItensOnStorage(resp)
+      }
 
       setIsOpenModal(false);
       setIsOpenModalSignIn(false);

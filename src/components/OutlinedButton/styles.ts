@@ -11,6 +11,10 @@ const Outlined = styled.button`
   height: 2rem;
   border-radius: 32px;
 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
   p {
     padding: 1rem 0.5rem;
     text-align: center;
