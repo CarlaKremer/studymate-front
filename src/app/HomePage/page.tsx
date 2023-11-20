@@ -85,7 +85,7 @@ export default function HomePage() {
             key={i}
             href={{
               pathname: '/StudyRoom',
-              query: { roomId: room.id }
+              query: { roomId: room.id, roomTitle: room.title }
             }}
           >
             <Card
