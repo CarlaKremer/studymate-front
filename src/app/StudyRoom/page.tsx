@@ -23,6 +23,8 @@ export default function StudyRoom() {
   const [isOpen, setIsOpen] = useState(true);
   const [userLogged, setUserLogged] = useState<any>(null);
 
+  const roomTitle = searchParams.get('roomTitle');
+
   const getRoomId = () => {
     return searchParams.get('roomId');
   }
@@ -68,6 +70,7 @@ export default function StudyRoom() {
               alt="ícone de seta para esquerda"
             />
           </Link>
+          <p>{roomTitle}</p>
         </Navigation>
         {loading ? <Loading /> : (
           <VideoCall token={liveKitToken} />

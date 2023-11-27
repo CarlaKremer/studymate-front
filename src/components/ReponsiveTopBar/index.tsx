@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { Container, MenuOpen, TopBar } from "./styles";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Accordion,
-  AccordionBody,
-  AccordionHeader,
-  AccordionItem,
-} from "react-headless-accordion";
+// import {
+//   Accordion,
+//   AccordionBody,
+//   AccordionHeader,
+//   AccordionItem,
+// } from "react-headless-accordion";
 import OutlinedButton from "../OutlinedButton";
 
 type Props = {
@@ -24,12 +24,13 @@ export default function ResponsiveTopBar({
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [userLogged, setUserLogged] = useState<any>(null);
-  
+  const router = useRouter();
+
   function handleLogout() {
     localStorage.clear();
     sessionStorage.clear();
-    // router.push("/Home");
-    window.location.reload();
+    router.push("/");
+    // window.location.reload();
   }
 
   function handleMenu (){
@@ -50,6 +51,7 @@ export default function ResponsiveTopBar({
       <TopBar isOpen={openMenu}>
         <p>StudyMate</p>
         <Image
+        alt="menu"
           src={"/assets/icons/menu.svg"}
           width={1}
           height={1}

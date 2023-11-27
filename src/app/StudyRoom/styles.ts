@@ -51,7 +51,7 @@ export const RoomMates = styled.div`
   height: 8rem;
   border-radius: 1rem 1rem 0rem 0rem;
 
-  background-color: rgba(0, 0, 0, 0.4);
+  /* background-color: rgba(0, 0, 0, 0.4); */
 `;
 
 export const Slider = styled.div`
