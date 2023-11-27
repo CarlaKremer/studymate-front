@@ -20,7 +20,6 @@ export default function StudyRoom() {
   const [liveKitToken, setLiveKitToken] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [isOpen, setIsOpen] = useState(true);
   const [userLogged, setUserLogged] = useState<any>(null);
 
   const roomTitle = searchParams.get('roomTitle');
@@ -75,7 +74,6 @@ export default function StudyRoom() {
         {loading ? <Loading /> : (
           <VideoCall token={liveKitToken} />
         )}
-        <RoomMates />
       </Column>
 
       <Slider>

@@ -10,149 +10,141 @@ import {
   TrackMutedIndicator,
   RoomAudioRenderer,
   useTracks,
-  CarouselLayout,
-  ParticipantTile,
-  ParticipantLoop,
   ParticipantName,
-  useParticipants,
-  PreJoin,
-  FocusLayout 
 } from '@livekit/components-react';
 import { Track } from "livekit-client";
-import { Wrap, Container, Row} from "./styles";
+import { Row } from "./styles";
 import styles from './style.module.scss';
 import {
 
   RoomName,
   TrackLoop,
-  
+
   useIsMuted,
   useIsSpeaking,
   useToken,
   useTrackRefContext,
-  
+
 } from '@livekit/components-react';
-import { useMemo,} from 'react';
+import { useMemo, } from 'react';
 
 const serverUrl = 'ws://localhost:7880';
 
+
 export default function VideoCall({ token }: { token: string }) {
+  const [tryToConnect, setTryToConnect] = useState(false);
+  const [connected, setConnected] = useState(false);
 
   return (
-    <Wrap>
+    <div data-lk-theme="default" className={styles.container}>
       <LiveKitRoom
-        video={false}
-        audio={false}
         token={token}
         serverUrl={serverUrl}
-        // Use the default LiveKit theme for nice styles.
-        data-lk-theme="default"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          backgroundColor: 'transparent'
+        connect={tryToConnect}
+        video={false}
+        audio={true}
+        // simulateParticipants={15}
+        onConnected={() => setConnected(true)}
+        onDisconnected={() => {
+          setTryToConnect(false);
+          setConnected(false);
         }}
+        style={{ backgroundColor: 'transparent' }}
       >
-        {/* Your custom component with basic video conferencing functionality. */}
-        <div>
-          <MyVideoConference />
-          {/* The RoomAudioRenderer takes care of room-wide audio for you. */}
+        <div style={{ display: 'grid', placeContent: 'center', height: '100%' }}>
+          <button
+            className="lk-button"
+            onClick={() => {
+              setTryToConnect(true);
+            }}
+          >
+            Enter Room
+          </button>
+        </div>
+
+        <div className={styles.slider} style={{ bottom: connected ? '0px' : '-100%' }}>
+          <h1>
+            <RoomName />
+          </h1>
+          <Stage />
+          <ScreenShare />
+          <ControlBar
+            variation="minimal"
+            controls={{ microphone: true, camera: false, screenShare: true }}
+          />
           <RoomAudioRenderer />
-        </div>  {/* Controls for the user to start/stop audio, video, and screen
-        share tracks and to leave the room. */}
-        <ControlBar className="end" />
+        </div>
       </LiveKitRoom>
-    </Wrap>
+    </div>
   );
+
 }
 
-const MyVideoConference = () => {
-  const tracks = useTracks([
-    { source: Track.Source.Camera, withPlaceholder: true },
-  ]);
+const ScreenShare = () => {
+  const tracksScreenShare = useTracks([Track.Source.ScreenShare]);
 
-  const tracksScreenShare = useTracks([
-    { source: Track.Source.ScreenShare, withPlaceholder: false },
-  ]);
-  
+  return <div>
+    <GridLayout tracks={tracksScreenShare}>
+      <TrackRefContext.Consumer>
+        {(track) => track && (
+          <div className="row">
+            {isTrackReference(track) ?
+              <>
+                <CustomScreenShareTile track={tracksScreenShare} />
+              </>
+              : <></>}
+            <Row>
+              <ParticipantName />
+            </Row>
+          </div>
+        )}
+      </TrackRefContext.Consumer>
+    </GridLayout>
+  </div>;
+}
+const Stage = () => {
+  const tracksReferences = useTracks([Track.Source.Microphone]);
+
   return (
-    <>
-      <CarouselLayout  tracks={tracks}>
-        <TrackRefContext.Consumer>
-          {(track) =>
-            track && (
-              <div className="row">
-              {isTrackReference(track) ? 
-                <>
-                  <CustomParticipantTile track={track}/>
-                  {/* <CarouselLayout tracks={tracks} orientation="horizontal"> */}
-                    {/* <VideoTrack {...track} /> */}
-                    {/* <ParticipantTile /> */}
-                  {/* </CarouselLayout>  */}
-                </>
-              : <></>}
-              <Row>
-                <ParticipantName/>
-              </Row>
-                  {/* <TrackMutedIndicator source={Track.Source.Microphone} /> */}
-                  {/* <TrackMutedIndicator source={track.source} /> */}
-              </div>
-            )
-          }
-        </TrackRefContext.Consumer>
-      </CarouselLayout>
-
-      <GridLayout  tracks={tracksScreenShare}>
-        <TrackRefContext.Consumer>
-          {(track) =>
-            track && (
-              <div className="row">
-              {isTrackReference(track) ? 
-                <>
-                  <CustomScreenShareTile track={tracksScreenShare}/>
-                </>
-              : <></>}
-              <Row>
-                <ParticipantName/>
-              </Row>
-              </div>
-            )
-          }
-        </TrackRefContext.Consumer>
-      </GridLayout>
-    </>
+    <div className="">
+      <div className={styles.stageGrid}>
+        <TrackLoop tracks={tracksReferences}>
+          <CustomParticipantTile></CustomParticipantTile>
+        </TrackLoop>
+      </div>
+    </div>
   );
-}
+};
 
-const CustomParticipantTile = (track:any) => {
+const CustomParticipantTile = () => {
   const trackRef = useTrackRefContext();
   const isSpeaking = useIsSpeaking(trackRef.participant);
   const isMuted = useIsMuted(trackRef);
 
   const id = useMemo(() => trackRef.participant.identity, [trackRef.participant.identity]);
-  console.log(track);
-  return (
-    <section className={ styles['participant-tile'] } title={trackRef.participant.name}>
-          <div
-            className={styles['avatar-container']}
-            style={{ borderColor: isSpeaking ? 'greenyellow' : 'transparent' }}
-          >
-            <div
-              className={styles.avatar}
-            >
-              {/* {!isTrackReference(track) ?  */}
-                  <VideoTrack {...track} placeholder="true" />
-              {/* : <img
-                src={`https://avatars.dicebear.com/api/avataaars/${id}.svg?mouth=default,smile,tongue&eyes=default,happy,hearts&eyebrows=default,defaultNatural,flatNatural`}
-                className="fade-in"
-                width={150}
-                height={150}
-                alt={`Avatar of user: ${trackRef.participant.identity}`}
-                />} */}
-            </div>
-          </div>
 
+  return (
+    <section className={styles['participant-tile']} title={trackRef.participant.name}>
+      <div
+        // className={`rounded-full border-2 p-0.5 transition-colors duration-1000 ${
+        className={styles['avatar-container']}
+        style={{
+          borderColor: isSpeaking ? 'greenyellow' : 'transparent',
+        }}
+      >
+        <div
+          className={styles.avatar}
+        // className="z-10 grid aspect-square items-center overflow-hidden rounded-full bg-beige transition-all will-change-transform"
+        >
+          <img
+            src={`https://api.dicebear.com/7.x/thumbs/svg?seed=${id}`}
+            className="fade-in"
+            width={100}
+            height={100}
+            alt={`Avatar of user: ${trackRef.participant.identity}`}
+          />
+        </div>
+      </div>
 
       <div style={{ opacity: isMuted ? 1 : 0 }} className={styles['mic-container']}>
         <div>
@@ -163,14 +155,10 @@ const CustomParticipantTile = (track:any) => {
   );
 };
 
-const CustomScreenShareTile = (track:any) => {
-  const trackRef = useTrackRefContext();
-  const isSpeaking = useIsSpeaking(trackRef.participant);
-  const isMuted = useIsMuted(trackRef);
-
+const CustomScreenShareTile = (track: any) => {
   return (
-    <div>
-              <VideoTrack {...track} placeholder="true"  />
+    <div style={{ maxHeight: '80%', overflow: 'hidden' }}>
+      <VideoTrack {...track} placeholder="true" style={{ width: '60%' }}/>
     </div>
   );
 };

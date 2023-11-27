@@ -16,6 +16,7 @@ export const Column = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding-right: 1rem;
+  width: 90%;
   gap: 1rem;
 `;
 
