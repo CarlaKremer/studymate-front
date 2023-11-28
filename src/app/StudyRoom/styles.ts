@@ -1,24 +1,38 @@
 import styled from 'styled-components';
 
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  /* align-items: flex-start; */
+`;
+
 export const Container = styled.div`
-  background: radial-gradient(circle at bottom, #EC6E80, #010042);
+  /* background: radial-gradient(circle at bottom, #EC6E80, #010042);
   box-sizing: border-box;
   padding: 0 0 0 2rem;
   width: 100vw;
   height: 100%;
+  */
+  
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-between; 
+  position: relative;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80');
+  background-size: cover;
 `;
 
-export const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-right: 1rem;
-  width: 90%;
-  gap: 1rem;
-`;
+// export const Column = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   padding-right: 1rem;
+//   width: 90%;
+//   gap: 1rem;
+// `;
 
 export const ColumnSlider = styled.div`
   display: flex;
@@ -34,26 +48,26 @@ export const ColumnSlider = styled.div`
 
 `;
 
-export const Navigation = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 1.5rem;
-  top: 0;
-  width: 30rem;
-  height:5rem;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 0 0 1rem 1rem;
-  
-`;
+// export const Navigation = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   padding: 1.5rem;
+//   top: 0;
+//   width: 30rem;
+//   height:5rem;
+//   background-color: rgba(0, 0, 0, 0.4);
+//   border-radius: 0 0 1rem 1rem;
 
-export const RoomMates = styled.div`
-  width: 20rem;
-  height: 8rem;
-  border-radius: 1rem 1rem 0rem 0rem;
+// `;
 
-  /* background-color: rgba(0, 0, 0, 0.4); */
-`;
+// export const RoomMates = styled.div`
+//   width: 20rem;
+//   height: 8rem;
+//   border-radius: 1rem 1rem 0rem 0rem;
+
+//   /* background-color: rgba(0, 0, 0, 0.4); */
+// `;
 
 export const Slider = styled.div`
     display: flex;
@@ -77,5 +91,5 @@ export const TodoWrap = styled.div`
   background-color: rgba(0, 0, 0, 0.65);
 `;
 
-export const PanelContainer = styled.div``;
+// export const PanelContainer = styled.div``;
 

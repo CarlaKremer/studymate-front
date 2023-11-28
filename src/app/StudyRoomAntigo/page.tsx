@@ -1,9 +1,7 @@
 'use client';
 import React, { useEffect, useState } from "react";
 import {
-  Row,
-   Container,
-  // Column, Navigation, RoomMates,
+  Container, Column, Navigation, RoomMates,
   PomodoroWrap, TodoWrap, ColumnSlider, Slider
 } from "./styles";
 import Chat from "@/components/Chat";
@@ -58,29 +56,26 @@ export default function StudyRoom() {
     }
     requestLivekitToken();
   }, []);
-
   return (
-    //  <Row>
-      <Container>
-        
-     {/* <Column>
+    <Container>
+      <Column>
         <Navigation>
-           <Link href="/HomePage">
-             <Image
-               className="arrow-icon"
-               src={"./assets/icons/left.svg"}
-               width={32}
-               height={32}
-               alt="ícone de seta para esquerda"
-             />
-           </Link>
-        <p>{roomTitle}</p>
+          <Link href="/HomePage">
+            <Image
+              className="arrow-icon"
+              src={"./assets/icons/left.svg"}
+              width={32}
+              height={32}
+              alt="ícone de seta para esquerda"
+            />
+          </Link>
+          <p>{roomTitle}</p>
         </Navigation>
-        {loading ? <Loading /> : ( */}
+        {loading ? <Loading /> : (
           <VideoCall token={liveKitToken} />
-        {/* )}
-          </Column>
-       */}
+        )}
+      </Column>
+
       <Slider>
         <ColumnSlider>
           <PomodoroWrap className="wrap">
@@ -93,10 +88,9 @@ export default function StudyRoom() {
         <Chat
           username={userLogged}
           roomId={getRoomId()}
-          server='http:localhost:3090' />
-      </Slider> 
+          server='http://localhost:3090' />
+      </Slider>
 
     </Container>
-    // {/* </Row> */}
   );
 }

@@ -51,7 +51,7 @@ export default function VideoCall({ token }: { token: string }) {
         }}
         style={{ backgroundColor: 'transparent' }}
       >
-        <div style={{ display: 'grid', placeContent: 'center', height: '100%' }}>
+        <div style={{ display: 'grid', placeContent: 'center', marginLeft: "1rem", height: '100%' }}>
           <button
             className="lk-button"
             onClick={() => {
@@ -83,11 +83,11 @@ export default function VideoCall({ token }: { token: string }) {
 const ScreenShare = () => {
   const tracksScreenShare = useTracks([Track.Source.ScreenShare]);
 
-  return <div>
+  return <div style={{ maxHeight: '400px', overflow: 'scroll' }}>
     <GridLayout tracks={tracksScreenShare}>
       <TrackRefContext.Consumer>
         {(track) => track && (
-          <div className="row">
+          <div className="row" >
             {isTrackReference(track) ?
               <>
                 <CustomScreenShareTile track={tracksScreenShare} />
@@ -157,8 +157,8 @@ const CustomParticipantTile = () => {
 
 const CustomScreenShareTile = (track: any) => {
   return (
-    <div style={{ maxHeight: '80%', overflow: 'hidden' }}>
-      <VideoTrack {...track} placeholder="true" style={{ width: '60%' }}/>
+    <div style={{ maxHeight: '600px', overflow: 'auto' }}>
+      <VideoTrack {...track} placeholder="true" style={{ width: '100%' }}/>
     </div>
   );
 };
