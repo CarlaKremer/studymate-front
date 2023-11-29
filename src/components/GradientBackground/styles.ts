@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Gradient = styled.div`
   background: radial-gradient(circle at bottom, #EC6E80, #010042);
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   color: white;

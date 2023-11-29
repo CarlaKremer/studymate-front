@@ -16,6 +16,7 @@ export const Container = styled.div`
 
   span {
     font-size: 1rem;
+    padding: 0.625rem 1rem;
   }
 
   .row{
@@ -35,5 +36,8 @@ export const Container = styled.div`
     display: none;
   }
 
+  `;
 
+export const Logo = styled.img`
+  max-height: 50px;
 `;

@@ -1,27 +1,13 @@
-import React, { ReactNode } from 'react';
-import {
-    HeroContainer,
-    TextContainer,
-    ImageContainer,
-    HeroImage,
-} from './styles';
+import React from 'react';
+import { HeroContainer } from './styles';
 
-interface HeroProps {
-    imageSrc: string;
-    children: ReactNode;
-}
-
-const Hero: React.FC<HeroProps> = ({ imageSrc, children }) => {
-    return (
-        <HeroContainer>
-            <TextContainer>
-                {children}
-            </TextContainer>
-            <ImageContainer>
-                <HeroImage src={imageSrc} alt="Hero" />
-            </ImageContainer>
-        </HeroContainer>
-    );
+const Hero: React.FC = () => {
+  return (
+    <HeroContainer>
+      <h1>Conheça a Study Mate</h1>
+      <p>Uma plataforma para criar e participar de grupos de estudo virtuais.</p>
+    </HeroContainer>
+  );
 };
 
 export default Hero;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Wrap } from './styles';
 
 interface CardProps {
@@ -6,8 +6,9 @@ interface CardProps {
   description: string;
 }
 
-export default function Card({title, description}:CardProps) {
-return (
+export default function Card({ title, description }: CardProps) {
+
+  return (
     <Wrap>
       <div className="card">
         <div className="card-content">
@@ -16,5 +17,5 @@ return (
         </div>
       </div>
     </Wrap>
-);
+  );
 }
