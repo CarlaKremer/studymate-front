@@ -26,14 +26,15 @@
   position: absolute;
   bottom: 0;
   width: 100vw;
-  max-width: 50rem;
-  height: 80%;
+  max-width: 48rem;
+  height: 85%;
   padding: 1rem;
-  left: 30vw;
-  transform: translateX(-50%);
+  left: 0;
+  margin-left: 0.5rem;
+  // transform: translateX(-50%);
   border-top-left-radius: 2rem;
   border-top-right-radius: 2rem;
-  background-color: var(--lk-bg3);
+  background-color: rgba(0, 0, 0, 0.65);
   transition: bottom 1s;
 
   display: grid;

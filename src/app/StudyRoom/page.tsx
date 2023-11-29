@@ -15,7 +15,7 @@ import { useSearchParams } from 'next/navigation';
 import VideoCall from "@/components/VideoCall";
 import Loading from "@/components/Loading";
 import api from "../../service/api";
-
+import GradientBackground from "@/components/GradientBackground";
 
 export default function StudyRoom() {
   const searchParams = useSearchParams();
@@ -61,42 +61,44 @@ export default function StudyRoom() {
 
   return (
     //  <Row>
-      <Container>
+      <GradientBackground>
+        <Container>
+          
+             {/* <Column>
+          <Navigation>
+             <Link href="/HomePage">
+               <Image
+                 className="arrow-icon"
+                 src={"./assets/icons/left.svg"}
+                 width={32}
+                 height={32}
+                 alt="ícone de seta para esquerda"
+               />
+             </Link>
+          <p>{roomTitle}</p>
+          </Navigation>
+          {loading ? <Loading /> : ( */}
+            <VideoCall token={liveKitToken} />
+          {/* )}
+            </Column>
+         */}
+        <Slider>
+          <ColumnSlider>
+            <PomodoroWrap className="wrap">
+              <Pomodoro />
+            </PomodoroWrap>
+            <TodoWrap className="wrap">
+              <Todo />
+            </TodoWrap>
+          </ColumnSlider>
+          <Chat
+            username={userLogged}
+            roomId={getRoomId()}
+            server='http://localhost:3090' />
+        </Slider> 
         
-     {/* <Column>
-        <Navigation>
-           <Link href="/HomePage">
-             <Image
-               className="arrow-icon"
-               src={"./assets/icons/left.svg"}
-               width={32}
-               height={32}
-               alt="ícone de seta para esquerda"
-             />
-           </Link>
-        <p>{roomTitle}</p>
-        </Navigation>
-        {loading ? <Loading /> : ( */}
-          <VideoCall token={liveKitToken} />
-        {/* )}
-          </Column>
-       */}
-      <Slider>
-        <ColumnSlider>
-          <PomodoroWrap className="wrap">
-            <Pomodoro />
-          </PomodoroWrap>
-          <TodoWrap className="wrap">
-            <Todo />
-          </TodoWrap>
-        </ColumnSlider>
-        <Chat
-          username={userLogged}
-          roomId={getRoomId()}
-          server='http://localhost:3090' />
-      </Slider> 
-
-    </Container>
+            </Container>
+      </GradientBackground>
     // {/* </Row> */}
   );
 }

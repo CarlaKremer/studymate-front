@@ -53,6 +53,7 @@ export default function VideoCall({ token }: { token: string }) {
         style={{ backgroundColor: 'transparent' }}
       >
         <div style={{ display: 'grid', placeContent: 'center', marginLeft: "1rem", height: '100%' }}>
+        {connected ? <></> : <>
           <button
             className="lk-button"
             onClick={() => {
@@ -61,6 +62,8 @@ export default function VideoCall({ token }: { token: string }) {
           >
             Enter Room
           </button>
+          
+          </>}
         </div>
 
         <div className={styles.slider} style={{ bottom: connected ? '0px' : '-100%' }}>

@@ -41,7 +41,7 @@ return (
       );
     })}
     </div>
-    <TextInput className='input' onKeyDown={handleKeyPress} onChange={(e) => setTask(e.target.value)} placeholder='add a todo' value={task}/>
+    <TextInput className='input' onKeyDown={handleKeyPress} onChange={(e) => setTask(e.target.value)} placeholder='Adicione uma nova tarefa' value={task}/>
   </Container>
 );
 }

@@ -6,6 +6,13 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  .list{
+    max-width: 100px;
+  }
+  .p{
+    word-wrap: break-word;
+    
+  }
 `;
 
 export const Item = styled.div`

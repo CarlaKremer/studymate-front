@@ -21,8 +21,8 @@ export const Container = styled.div`
   height: 100vh;
   max-height: 100vh;
   overflow: hidden;
-  background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80');
-  background-size: cover;
+  /* background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80');
+  background-size: cover; */
 `;
 
 // export const Column = styled.div`
