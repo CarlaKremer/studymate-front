@@ -107,7 +107,7 @@ const LandingPage: React.FC = () => {
       </Header>
 
       <Hero imageSrc='/assets/images/study-mate-landing-1.png'>
-        O Study Mate é a sua plataforma definitiva para criar e participar de salas de estudo compartilhadas de forma simples e eficaz. Nosso objetivo é tornar o aprendizado mais acessível, colaborativo e produtivo.
+        <p>O Study Mate é a sua plataforma definitiva para criar e participar de salas de estudo compartilhadas de forma simples e eficaz. Nosso objetivo é tornar o aprendizado mais acessível, colaborativo e produtivo.</p>
 
         <ButtonContainer>
           <Button onClick={()=>setIsOpenModal(true)}>login/register</Button>

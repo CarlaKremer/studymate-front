@@ -2,7 +2,6 @@ import React, { ReactNode } from 'react';
 import {
     HeroContainer,
     TextContainer,
-    Text,
     ImageContainer,
     HeroImage,
 } from './styles';
@@ -16,7 +15,7 @@ const Hero: React.FC<HeroProps> = ({ imageSrc, children }) => {
     return (
         <HeroContainer>
             <TextContainer>
-                <Text>{children}</Text>
+                {children}
             </TextContainer>
             <ImageContainer>
                 <HeroImage src={imageSrc} alt="Hero" />

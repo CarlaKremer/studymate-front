@@ -21,6 +21,12 @@ export const TextContainer = styled.div`
   justify-content: center;
   align-self: center;
   padding: 20px;
+
+  p{
+    color: #fff;
+    font-size: 18px;
+    line-height: 1.5;
+  }
   
 `;
 
