@@ -36,10 +36,13 @@ export const Wrap = styled.div`
   }
   .card-description{
     color: #a18a96;
-    min-height: 1rem;
   }
   .card-content:hover{
     transform: translateY(0);
+  }
+  p {
+    max-height: 30px;
+    margin: 10px 0;
   }
 `;
 
