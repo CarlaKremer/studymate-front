@@ -11,6 +11,7 @@ import {
   RoomAudioRenderer,
   useTracks,
   ParticipantName,
+  CarouselLayout
 } from '@livekit/components-react';
 import { Track } from "livekit-client";
 import { Row } from "./styles";
@@ -83,15 +84,12 @@ export default function VideoCall({ token }: { token: string }) {
 const ScreenShare = () => {
   const tracksScreenShare = useTracks([Track.Source.ScreenShare]);
 
-  return <div style={{ maxHeight: '400px', overflow: 'scroll' }}>
-    <GridLayout tracks={tracksScreenShare}>
+  return <CarouselLayout tracks={tracksScreenShare} style={{height: '400px'}} orientation="vertical" >
       <TrackRefContext.Consumer>
         {(track) => track && (
           <div className="row" >
             {isTrackReference(track) ?
-              <>
                 <CustomScreenShareTile track={tracksScreenShare} />
-              </>
               : <></>}
             <Row>
               <ParticipantName />
@@ -99,8 +97,7 @@ const ScreenShare = () => {
           </div>
         )}
       </TrackRefContext.Consumer>
-    </GridLayout>
-  </div>;
+    </CarouselLayout>;
 }
 const Stage = () => {
   const tracksReferences = useTracks([Track.Source.Microphone]);
@@ -157,8 +154,8 @@ const CustomParticipantTile = () => {
 
 const CustomScreenShareTile = (track: any) => {
   return (
-    <div style={{ maxHeight: '600px', overflow: 'auto' }}>
-      <VideoTrack {...track} placeholder="true" style={{ width: '100%' }}/>
-    </div>
+    <div style={{ overflow: 'hidden' }}>
+      <VideoTrack {...track} placeholder="true" style={{ width: '100%', maxHeight:'auto' }}/>
+     </div>
   );
 };

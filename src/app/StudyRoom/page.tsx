@@ -93,7 +93,7 @@ export default function StudyRoom() {
         <Chat
           username={userLogged}
           roomId={getRoomId()}
-          server='http:localhost:3090' />
+          server='http://localhost:3090' />
       </Slider> 
 
     </Container>
