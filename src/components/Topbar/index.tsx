@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Container } from './styles';
 import OutlinedButton from '../OutlinedButton';
+import  {useRouter} from 'next/navigation';
 
 type Props = {
   isLoggedChanged?:any,
@@ -15,12 +16,12 @@ export default function Topbar({
   handleOpenModalNewRoom
 }: Props) {
   const [userLogged, setUserLogged] = useState<any>(null);
-
+  const router = useRouter();
   function handleLogout() {
     localStorage.clear();
     sessionStorage.clear();
-    // router.push("/Home");
-    window.location.reload();
+    router.push("/");
+    // window.location.reload();
   }
 
   
