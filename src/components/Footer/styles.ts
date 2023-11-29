@@ -8,5 +8,4 @@ export const FooterContainer = styled.footer`
   bottom: 0;
   width: 100%;
   height: 8rem;
-  position: fixed;
 `;
