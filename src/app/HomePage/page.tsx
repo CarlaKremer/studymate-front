@@ -47,6 +47,9 @@ export default function HomePage() {
       setErrorCreateRoom(true);
       console.log(error);
     }
+
+    setNameNewRoom("");
+    setDescriptionNewRoom("");
     setLoadingCreateRoom(false);
   }
 
