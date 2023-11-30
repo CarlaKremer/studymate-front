@@ -1,9 +1,7 @@
 'use client';
 import {
-  // Header,
-  ButtonContainer,
-  Button,
-  ModalWrapper
+  ModalWrapper,
+  MainContainer
 } from './styles';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
@@ -18,11 +16,7 @@ import GradientBackground from "@/components/GradientBackground";
 import { useRouter } from "next/navigation";
 import InfoSection from '@/components/InfoSection';
 import Footer from '@/components/Footer';
-import { styled } from 'styled-components';
 
-const MainContainer = styled.div`
-  margin-top: 100px;
-`;
 
 interface PropsResponse {
   data: {
