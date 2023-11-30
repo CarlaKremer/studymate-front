@@ -70,13 +70,16 @@ export default function VideoCall({ token }: { token: string }) {
           <h1>
             <RoomName />
           </h1>
-          <Stage />
-          <ScreenShare />
-          <ControlBar
-            variation="minimal"
-            controls={{ microphone: true, camera: false, screenShare: true }}
-          />
-          <RoomAudioRenderer />
+          <div>
+            <Stage />
+            <ScreenShare />
+            <ControlBar
+              className={styles.controlBar}
+              variation='minimal'
+              controls={{ microphone: true, camera: false, screenShare: true }}
+              />
+          </div>
+            <RoomAudioRenderer />
         </div>
       </LiveKitRoom>
     </div>
@@ -87,7 +90,7 @@ export default function VideoCall({ token }: { token: string }) {
 const ScreenShare = () => {
   const tracksScreenShare = useTracks([Track.Source.ScreenShare]);
 
-  return <CarouselLayout tracks={tracksScreenShare} style={{height: '400px'}} orientation="vertical" >
+  return <CarouselLayout tracks={tracksScreenShare} style={{maxHeight: '30vw'}} orientation="vertical" >
       <TrackRefContext.Consumer>
         {(track) => track && (
           <div className="row" >

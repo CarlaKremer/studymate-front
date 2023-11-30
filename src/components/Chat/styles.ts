@@ -29,6 +29,7 @@ height: 100vh;
     flex-direction: column;
     justify-content: flex-end;
 
+    /* max-width: 13vw; */
     
     .author{
         font-weight: 500;
@@ -41,6 +42,10 @@ height: 100vh;
         font-size: 14px;
         letter-spacing: 0.06em;
         color: #E4E4E4;
+        font-size: 12px;
+        hyphens: auto;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
     }
 }
 
