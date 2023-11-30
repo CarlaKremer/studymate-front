@@ -1,3 +1,3 @@
 export default function app() {
-  return <p>default loading page </p>;
+  return <p>Carregando..</p>;
 }

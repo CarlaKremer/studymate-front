@@ -114,3 +114,7 @@ export const ModalWrapper = styled.div`
     }
   }
 `;
+
+export const MainContainer = styled.div`
+  margin-top: 100px;
+`;
