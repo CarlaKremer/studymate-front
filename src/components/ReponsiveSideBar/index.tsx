@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { Container, MenuOpen, TopBar } from "./styles";
 import Image from "next/image";
 

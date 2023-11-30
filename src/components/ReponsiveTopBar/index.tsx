@@ -3,13 +3,6 @@ import { useRouter } from "next/navigation";
 import { Container, MenuOpen, TopBar } from "./styles";
 import Image from "next/image";
 import Link from "next/link";
-// import {
-//   Accordion,
-//   AccordionBody,
-//   AccordionHeader,
-//   AccordionItem,
-// } from "react-headless-accordion";
-import OutlinedButton from "../OutlinedButton";
 
 type Props = {
   isLoggedChanged?:any,
