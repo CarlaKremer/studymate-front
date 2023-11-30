@@ -1,23 +1,7 @@
 import styled from 'styled-components';
 
 export const GridLayout = styled.div`
-  /* .container {  display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-      grid-template-rows:  1fr 1fr 1fr 1fr 1fr 1fr;
-      gap: 0px 0px;
-      grid-auto-flow: row;
-      grid-template-areas:
-        "video video video pomodoro chat"
-        "video video video todo chat"
-        "video video video todo chat";
-  } */
-
-  /* display: flex;
-  flex-direction: row;
-  /* justify-content: space-between;  */
-  /* position: relative; 
-  height: 100vh;*/
-  /* overflow: hidden;  */
+overflow: hidden;
   .container {  
     display: grid; 
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
