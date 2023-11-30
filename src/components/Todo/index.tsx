@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Container, Item, TextInput } from './styles';
+import Image from 'next/image';
 
 interface Task {
   text: string;
@@ -34,9 +35,13 @@ return (
     {taskList.map((task: Task, index: number) => {
       return (
         <Item key={index}>
-          <input type='checkbox' />
-          <p>{task.text}</p>
-          <button onClick={(): void =>removeTask(index)}>X</button>
+          <div className='row'>
+            <input type='checkbox' className='checkbox' />
+            <p>{task.text}</p>
+          </div>
+          <button onClick={(): void =>removeTask(index)} className='remove-button'>
+            <Image src='/assets/icons/X.svg' width={20} height={20} alt='remove task'/>
+          </button>
         </Item>
       );
     })}
