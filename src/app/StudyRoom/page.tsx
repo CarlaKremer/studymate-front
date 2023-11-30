@@ -1,21 +1,15 @@
 'use client';
 import React, { useEffect, useState } from "react";
 import {
-  Row,
-   Container,
-  // Column, Navigation, RoomMates,
-  PomodoroWrap, TodoWrap, ColumnSlider, Slider
+   GridLayout
 } from "./styles";
 import Chat from "@/components/Chat";
-import Link from "next/link";
-import Image from "next/image";
 import Todo from "@/components/Todo";
 import Pomodoro from "@/components/Pomodoro";
 import { useSearchParams } from 'next/navigation';
 import VideoCall from "@/components/VideoCall";
-import Loading from "@/components/Loading";
 import api from "../../service/api";
-
+import GradientBackground from "@/components/GradientBackground";
 
 export default function StudyRoom() {
   const searchParams = useSearchParams();
@@ -60,43 +54,31 @@ export default function StudyRoom() {
   }, []);
 
   return (
-    //  <Row>
-      <Container>
-        
-     {/* <Column>
-        <Navigation>
-           <Link href="/HomePage">
-             <Image
-               className="arrow-icon"
-               src={"./assets/icons/left.svg"}
-               width={32}
-               height={32}
-               alt="ícone de seta para esquerda"
-             />
-           </Link>
-        <p>{roomTitle}</p>
-        </Navigation>
-        {loading ? <Loading /> : ( */}
-          <VideoCall token={liveKitToken} />
-        {/* )}
-          </Column>
-       */}
-      <Slider>
-        <ColumnSlider>
-          <PomodoroWrap className="wrap">
-            <Pomodoro />
-          </PomodoroWrap>
-          <TodoWrap className="wrap">
-            <Todo />
-          </TodoWrap>
-        </ColumnSlider>
-        <Chat
-          username={userLogged}
-          roomId={getRoomId()}
-          server='http://localhost:3090' />
-      </Slider> 
+  <GradientBackground>
+      <GridLayout>
+        <div className="container">
 
-    </Container>
-    // {/* </Row> */}
+            <div className="pomodoro"> 
+                <Pomodoro />
+            </div>
+
+            <div className="todo">
+              <Todo />
+            </div>
+
+            <div className="chat"> 
+              <Chat
+                username={userLogged}
+                roomId={getRoomId()}
+                server='http://localhost:3090' />
+            </div>
+
+            <div className="video">
+              <VideoCall token={liveKitToken} />
+            </div>
+
+        </div>
+      </GridLayout>
+  </GradientBackground>
   );
 }

@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 const Gradient = styled.div`
   background: radial-gradient(circle at bottom, #EC6E80, #010042);
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   color: white;

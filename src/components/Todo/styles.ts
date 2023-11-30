@@ -6,7 +6,11 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-`;
+  margin-left: 0.5rem;
+  .list{
+    max-width: 90%;
+  }
+  `;
 
 export const Item = styled.div`
   display: flex;
@@ -14,6 +18,13 @@ export const Item = styled.div`
   align-items: center;
   gap: 10px;
   margin-bottom: 0.5rem;
+  width: 100%;
+  p {
+    font-size: 12px;
+    hyphens: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
 `;
 
 export const TextInput = styled.input`

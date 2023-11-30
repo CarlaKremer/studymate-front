@@ -1,10 +1,11 @@
 'use client';
 import {
-  Header,
+  // Header,
   ButtonContainer,
   Button,
   ModalWrapper
 } from './styles';
+import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
@@ -15,12 +16,19 @@ import Loading from "@/components/Loading";
 import api from "../../service/api";
 import GradientBackground from "@/components/GradientBackground";
 import { useRouter } from "next/navigation";
+import InfoSection from '@/components/InfoSection';
+import Footer from '@/components/Footer';
+import { styled } from 'styled-components';
+
+const MainContainer = styled.div`
+  margin-top: 100px;
+`;
 
 interface PropsResponse {
-  data:{
-    username:string, 
-    access_token:string, 
-    id:string
+  data: {
+    username: string,
+    access_token: string,
+    id: string
   }
 }
 const LandingPage: React.FC = () => {
@@ -34,7 +42,7 @@ const LandingPage: React.FC = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [isOpenModalSignIn, setIsOpenModalSignIn] = useState<boolean>(false);
 
-  function setItensOnStorage(resp:PropsResponse){
+  function setItensOnStorage(resp: PropsResponse) {
     localStorage.setItem("username", JSON.stringify(resp.data.username));
     sessionStorage.setItem("username", JSON.stringify(resp.data.username));
 
@@ -84,7 +92,7 @@ const LandingPage: React.FC = () => {
 
       const resp = await api.post("/users", raw);
 
-      if(resp.status === 200) {
+      if (resp.status === 200) {
         setItensOnStorage(resp)
       }
 
@@ -101,20 +109,19 @@ const LandingPage: React.FC = () => {
 
   return (
     <>
-    <GradientBackground>
-      <Header>
-        <h1>Study Mate</h1>
-      </Header>
+      <GradientBackground>
+        <Header
+          src='/assets/icons/study-mate.svg'
+          onClick={() => setIsOpenModal(true)} />
 
-      <Hero imageSrc='/assets/images/study-mate-landing-1.png'>
-        <p>O Study Mate é a sua plataforma definitiva para criar e participar de salas de estudo compartilhadas de forma simples e eficaz. Nosso objetivo é tornar o aprendizado mais acessível, colaborativo e produtivo.</p>
+        <MainContainer>
+          <Hero />
+          <InfoSection />
+        </MainContainer>
 
-        <ButtonContainer>
-          <Button onClick={()=>setIsOpenModal(true)}>login/register</Button>
-        </ButtonContainer>
-      </Hero>
+        <Footer />
 
-    </GradientBackground>
+      </GradientBackground>
 
       {/* Login */}
       <Modal isOpenModal={isOpenModal} setOpenModal={!isOpenModal}>
@@ -272,7 +279,7 @@ const LandingPage: React.FC = () => {
         )}
       </Modal>
     </>
-    
+
   );
 };
 

@@ -12,6 +12,7 @@ import Loading from "@/components/Loading";
 import api from "../../service/api";
 import GradientBackground from "@/components/GradientBackground";
 import { useRouter } from "next/navigation";
+import Footer from "@/components/Footer";
 
 
 export default function HomePage() {
@@ -37,7 +38,7 @@ export default function HomePage() {
 
       const resp = await api.post("/rooms", raw);
 
-      if(resp.status === 201) {
+      if (resp.status === 201) {
         loadRooms();
         setIsOpenModalNewRoom(false);
       }
@@ -46,6 +47,9 @@ export default function HomePage() {
       setErrorCreateRoom(true);
       console.log(error);
     }
+
+    setNameNewRoom("");
+    setDescriptionNewRoom("");
     setLoadingCreateRoom(false);
   }
 
@@ -54,8 +58,8 @@ export default function HomePage() {
     setLoading(true);
     try {
       const res = await api.get("/rooms");
-      
-      if(res.status === 200) {
+
+      if (res.status === 200) {
         setRooms(res.data);
       }
     } catch (error) {
@@ -77,23 +81,23 @@ export default function HomePage() {
   return (
     <GradientBackground>
       <Topbar handleOpenModalNewRoom={handleOpenModalNewRoom} />
-      <ResponsiveTopBar  handleOpenModalNewRoom={handleOpenModalNewRoom}/>
+      <ResponsiveTopBar handleOpenModalNewRoom={handleOpenModalNewRoom} />
       {loading ? <Loading /> : (
-      <GridContainer>
-        {rooms.map((room, i) => (
-          <Link
-            key={i}
-            href={{
-              pathname: '/StudyRoom',
-              query: { roomId: room.id, roomTitle: room.title }
-            }}
-          >
-            <Card
-              title={room.title}
-              description={room.description} />
-          </Link>
-        ))}
-      </GridContainer>
+        <GridContainer>
+          {rooms.map((room, i) => (
+            <Link
+              key={i}
+              href={{
+                pathname: '/StudyRoom',
+                query: { roomId: room.id, roomTitle: room.title }
+              }}
+            >
+              <Card
+                title={room.title}
+                description={room.description} />
+            </Link>
+          ))}
+        </GridContainer>
       )}
 
       {/* Create new room */}
@@ -141,6 +145,8 @@ export default function HomePage() {
           </ModalWrapper>
         ) : (<Loading />)}
       </Modal>
+
+      <Footer />
     </GradientBackground>
   );
 }

@@ -17,15 +17,12 @@ import { Track } from "livekit-client";
 import { Row } from "./styles";
 import styles from './style.module.scss';
 import {
-
   RoomName,
   TrackLoop,
-
   useIsMuted,
   useIsSpeaking,
   useToken,
   useTrackRefContext,
-
 } from '@livekit/components-react';
 import { useMemo, } from 'react';
 
@@ -53,27 +50,35 @@ export default function VideoCall({ token }: { token: string }) {
         style={{ backgroundColor: 'transparent' }}
       >
         <div style={{ display: 'grid', placeContent: 'center', marginLeft: "1rem", height: '100%' }}>
+        {connected ? <></> : <>
           <button
             className="lk-button"
             onClick={() => {
               setTryToConnect(true);
             }}
           >
-            Enter Room
+            Compartilhar áudio
           </button>
+          
+          </>}
         </div>
 
         <div className={styles.slider} style={{ bottom: connected ? '0px' : '-100%' }}>
           <h1>
             <RoomName />
           </h1>
-          <Stage />
-          <ScreenShare />
-          <ControlBar
-            variation="minimal"
-            controls={{ microphone: true, camera: false, screenShare: true }}
-          />
-          <RoomAudioRenderer />
+          <div>
+            <Stage />
+            <div>
+              <ScreenShare />
+            </div>
+            <ControlBar
+              className={styles.controlBar}
+              variation='minimal'
+              controls={{ microphone: true, camera: false, screenShare: true }}
+              />
+          </div>
+            <RoomAudioRenderer />
         </div>
       </LiveKitRoom>
     </div>
@@ -84,10 +89,13 @@ export default function VideoCall({ token }: { token: string }) {
 const ScreenShare = () => {
   const tracksScreenShare = useTracks([Track.Source.ScreenShare]);
 
-  return <CarouselLayout tracks={tracksScreenShare} style={{height: '400px'}} orientation="vertical" >
+  return <CarouselLayout tracks={tracksScreenShare} orientation="vertical" 
+  style={{maxHeight: '60vh'}} 
+  >
+    
       <TrackRefContext.Consumer>
         {(track) => track && (
-          <div className="row" >
+          <div>
             {isTrackReference(track) ?
                 <CustomScreenShareTile track={tracksScreenShare} />
               : <></>}

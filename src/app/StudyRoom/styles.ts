@@ -1,95 +1,37 @@
 import styled from 'styled-components';
 
-export const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  /* align-items: flex-start; */
-`;
+export const GridLayout = styled.div`
+overflow: hidden;
+  .container {  
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "video video video pomodoro chat"
+      "video video video todo chat"
+      "video video video todo chat"; 
+  }
 
-export const Container = styled.div`
-  /* background: radial-gradient(circle at bottom, #EC6E80, #010042);
-  box-sizing: border-box;
-  padding: 0 0 0 2rem;
-  width: 100vw;
-  height: 100%;
-  */
+  .video{
+    grid-area: video;
+  }
   
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between; 
-  position: relative;
-  height: 100vh;
-  max-height: 100vh;
-  overflow: hidden;
-  background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80');
-  background-size: cover;
-`;
+  .pomodoro { 
+    grid-area: pomodoro; 
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 1rem 0 0 0 ;
+    border-bottom: 1px solid #000;
+  }
 
-// export const Column = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   padding-right: 1rem;
-//   width: 90%;
-//   gap: 1rem;
-// `;
+  .todo { 
+    grid-area: todo; 
+    background-color: rgba(0, 0, 0, 0.65);
+    border-radius: 0 0 0 1rem;
+  }
 
-export const ColumnSlider = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-
-  .wrap{
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  .chat { 
+    grid-area: chat; 
   }
 
 `;
-
-// export const Navigation = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   padding: 1.5rem;
-//   top: 0;
-//   width: 30rem;
-//   height:5rem;
-//   background-color: rgba(0, 0, 0, 0.4);
-//   border-radius: 0 0 1rem 1rem;
-
-// `;
-
-// export const RoomMates = styled.div`
-//   width: 20rem;
-//   height: 8rem;
-//   border-radius: 1rem 1rem 0rem 0rem;
-
-//   /* background-color: rgba(0, 0, 0, 0.4); */
-// `;
-
-export const Slider = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-`;
-
-export const PomodoroWrap = styled.div`
-  width: 18rem;
-  border-radius: 1rem 0 0 0 ;
-  background-color: #000;
-  opacity: 0.75;
-  border-bottom: 1px solid #000;
-`;
-
-export const TodoWrap = styled.div`
-  width: 100%;
-  height: 100%;
-  border-radius: 0 0 0 1rem;
-  background-color: rgba(0, 0, 0, 0.65);
-`;
-
-// export const PanelContainer = styled.div``;
-

@@ -43,6 +43,8 @@ export const ContainerButtons = styled.div<Props>`
 
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
 
   button {
