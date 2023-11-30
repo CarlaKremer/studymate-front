@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Container, Logo } from './styles';
 import OutlinedButton from '../OutlinedButton';

@@ -11,12 +11,10 @@ import Input from "@/components/Input";
 import Loading from "@/components/Loading";
 import api from "../../service/api";
 import GradientBackground from "@/components/GradientBackground";
-import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
 
 
 export default function HomePage() {
-  const router = useRouter();
   const [rooms, setRooms] = useState<any[]>([]);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);

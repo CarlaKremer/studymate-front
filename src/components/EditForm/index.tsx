@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { FormContainer, Form, Label, Input, Button } from './styles'
 

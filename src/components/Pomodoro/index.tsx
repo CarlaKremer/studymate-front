@@ -44,6 +44,7 @@ export default function Pomodoro() {
       setRest(false)
       setTime(25 * 60)
     }
+    setIsActive(false)
   }
 
   useLayoutEffect(() => {
@@ -62,12 +63,6 @@ export default function Pomodoro() {
         countdownTimeout = setTimeout(() => {
           setTime(time - 1)
           setTimeLocalStorage(timeLocalStorage + 1)
-
-          // if (time === 5 * 60) {
-          //   console.log(
-          //     'Restam 5 minutos'
-          //   )
-          // }
         }, 1000)
       } else if (isActive && time === 0) {
         setIsActive(false)

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Container, Icon, TextInput } from "./styles";
 
 type InputFiledProps = {

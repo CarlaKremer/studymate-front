@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Container } from './styles';
 import Link from 'next/link';
-import api from '@/service/api';
-import router from 'next/router';
 
 
 interface RoomItemProps {
