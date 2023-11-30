@@ -17,15 +17,12 @@ import { Track } from "livekit-client";
 import { Row } from "./styles";
 import styles from './style.module.scss';
 import {
-
   RoomName,
   TrackLoop,
-
   useIsMuted,
   useIsSpeaking,
   useToken,
   useTrackRefContext,
-
 } from '@livekit/components-react';
 import { useMemo, } from 'react';
 
@@ -60,7 +57,7 @@ export default function VideoCall({ token }: { token: string }) {
               setTryToConnect(true);
             }}
           >
-            Enter Room
+            Compartilhar áudio
           </button>
           
           </>}
@@ -72,7 +69,9 @@ export default function VideoCall({ token }: { token: string }) {
           </h1>
           <div>
             <Stage />
-            <ScreenShare />
+            <div>
+              <ScreenShare />
+            </div>
             <ControlBar
               className={styles.controlBar}
               variation='minimal'
@@ -90,10 +89,13 @@ export default function VideoCall({ token }: { token: string }) {
 const ScreenShare = () => {
   const tracksScreenShare = useTracks([Track.Source.ScreenShare]);
 
-  return <CarouselLayout tracks={tracksScreenShare} style={{maxHeight: '30vw'}} orientation="vertical" >
+  return <CarouselLayout tracks={tracksScreenShare} orientation="vertical" 
+  style={{maxHeight: '60vh'}} 
+  >
+    
       <TrackRefContext.Consumer>
         {(track) => track && (
-          <div className="row" >
+          <div>
             {isTrackReference(track) ?
                 <CustomScreenShareTile track={tracksScreenShare} />
               : <></>}
