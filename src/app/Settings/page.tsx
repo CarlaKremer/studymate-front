@@ -39,14 +39,12 @@ export default function Settings() {
     setLoading(true);
     try {
       const id = localStorage.getItem('id')?.replaceAll('"', "");
-      
-      const res = await api.get(`/rooms/author/${id}`);
+      setToken(localStorage.getItem('access_token')?.replaceAll('"', ""))
+      const res = await api
+        .get(`/rooms/author/${id}`, { headers: { 'Authorization': "Bearer " + token } });
 
-      if(res.status === 200){
         setRooms(res.data);
-      }
     } catch (error) {
-      setRooms([]);
       setError(true);
       console.log(error);
     }
@@ -146,7 +144,7 @@ export default function Settings() {
 
   useEffect(() => {
     loadRooms();
-  },[]);
+  },[token]);
 
   useEffect(() => {
     setToken(localStorage.getItem('access_token')?.replaceAll('"', ""));

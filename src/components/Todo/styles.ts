@@ -20,7 +20,7 @@ export const Item = styled.div`
   margin-bottom: 0.5rem;
   width: 100%;
   /* background-color: #5BB3AE; */
-  padding: 1rem 0.5rem 1rem 0.5rem;
+  padding: 0.5rem 0.5rem 0rem 0.5rem;
   p {
     font-size: 12px;
     hyphens: auto;
