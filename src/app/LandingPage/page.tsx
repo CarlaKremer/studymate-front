@@ -16,6 +16,7 @@ import GradientBackground from "@/components/GradientBackground";
 import { useRouter } from "next/navigation";
 import InfoSection from '@/components/InfoSection';
 import Footer from '@/components/Footer';
+import { useCredentials } from '../../contexts/Credentials';
 
 
 interface PropsResponse {
@@ -27,9 +28,10 @@ interface PropsResponse {
 }
 const LandingPage: React.FC = () => {
   const router = useRouter();
+  const { setCredentials } = useCredentials();
   const [userName, setUserName] = useState<string>("");
-  const [userEmail, setUserEmail] = useState<string>("admin@topics.com");
-  const [userPassword, setUserPassword] = useState<string>("test123");
+  const [userEmail, setUserEmail] = useState<string>("admin2@topics.com");
+  const [userPassword, setUserPassword] = useState<string>("test1232");
   const [rooms, setRooms] = useState<any[]>([]);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -42,6 +44,7 @@ const LandingPage: React.FC = () => {
 
     localStorage.setItem("access_token", JSON.stringify(resp.data.access_token));
     sessionStorage.setItem("access_token", JSON.stringify(resp.data.access_token));
+    setCredentials(resp.data.access_token);
 
     localStorage.setItem("id", JSON.stringify(resp.data.id));
     sessionStorage.setItem("id", JSON.stringify(resp.data.id));
